@@ -120,7 +120,7 @@ def tnd(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wanted):
         elif 51 < title_tag_generated_length < 61:
             title_tag_length_ok = "✅ - Length works perfectly fine."
         else:
-            title_tag_length_ok = "❌ - too long. Please clear the cache (press 'C') and regenerate."
+            title_tag_length_ok = "❌ - too long/short. Please clear the cache (press 'C') and regenerate."
         
         descr_tag_generated, descr_tag_generated_cost, descr_tag_generated_gptversion = gptapi.openAI_content(act_as_prompt_descr, content_prompt_descr, gpt_temp_wanted, gpt_top_p_wanted, gpt_version_wanted)
         descr_tag_generated_length = len(descr_tag_generated)
@@ -131,7 +131,7 @@ def tnd(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wanted):
         elif 151 < descr_tag_generated_length < 161:
             descr_tag_length_ok = "✅ - Length works perfectly fine."
         else:
-            descr_tag_length_ok = "❌ - too long. Please clear the cache (press 'C') and regenerate."
+            descr_tag_length_ok = "❌ - too long/short. Please clear the cache (press 'C') and regenerate."
 
         st.divider()
         st.subheader("Results")
