@@ -55,7 +55,7 @@ def tnd(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wanted):
 
     
     with col2_generic_info:
-        focus_keyword_input = st.text_input("Destination / Urlaubsort eingeben:", key = "generic_input_fokus_kw")
+        focus_keyword_input = st.text_input("Destination:", key = "generic_input_fokus_kw")
         if tnd_template_choice == "Transactional: Deals" or tnd_template_choice == "Transactional: Destination":
             urlaubsart_input = st.text_input("Enter type of holiday: (holiday, wellness weekend, weekend trip, all-inclusive, last minute,...)", key = "urlaubsart_input")
         elif tnd_template_choice == "Inspirational: Top-10-Article":
