@@ -1,16 +1,7 @@
 #### import libraries
 import streamlit as st
-import pandas as pd
-from bs4 import BeautifulSoup
-
-from requests.exceptions import RequestException
-import yaml
 import hmac
-
 ### functions from other files
-import functions.bingapifunction as bingapi
-import functions.gptapi as gptapi
-
 import tabs.about as about_tab
 import tabs.tnd as tnd_tab
 import tabs.sights_generation as sights_tab
