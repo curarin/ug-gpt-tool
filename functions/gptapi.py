@@ -10,16 +10,16 @@ import requests
 import string
 from openai import OpenAI
 
-
 ###GPT API KEY
 OPENAI_API_KEY = st.secrets["openai_api_key"]
 openai.api_key = OPENAI_API_KEY
+client = OpenAI()
 
 ####
 
 @st.cache_data
 def openAI_content(system_act_as, user_prompt, temp_wanted, top_p_wanted, gpt_version):
-    response = openai.ChatCompletion.create(
+    response = client.chat.completions.create( #).ChatCompletion.create(
         model=gpt_version,
         messages=[
             {"role": "system", "content": system_act_as},
@@ -54,7 +54,8 @@ def openAI_content(system_act_as, user_prompt, temp_wanted, top_p_wanted, gpt_ve
 
 @st.cache_data
 def openAI_vision(user_prompt, image_url):
-    response = openai.ChatCompletion.create(
+    #response = openai.ChatCompletion.create(
+    response = client.chat.completions.create(
         model="gpt-4-vision-preview",
         messages=[
             {
