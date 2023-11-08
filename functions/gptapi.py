@@ -28,9 +28,11 @@ def openAI_content(system_act_as, user_prompt, temp_wanted, top_p_wanted, gpt_ve
         temperature=temp_wanted,
         top_p=top_p_wanted
     )
-    st.write(response)
-    prompt_tokens = response["usage"]["prompt_tokens"]
-    completion_tokens = response["usage"]["completion_tokens"]
+    prompt_tokens = response.usage.prompt_tokens
+    completion_tokens = response.usage.completion_tokens
+    generated_content = response.choices[0].message.content
+    gpt_version_used = response.model
+
     
     if gpt_version == "gpt-4-1106-preview": 
         cost_per_token_input = 0.01
@@ -47,15 +49,11 @@ def openAI_content(system_act_as, user_prompt, temp_wanted, top_p_wanted, gpt_ve
     total_cost = cost_prompt + cost_completion
     total_cost = round(total_cost, 5)
 
-    generated_content = response.choices[0].message.content
-    gpt_version_used = response.model
-
     return generated_content, total_cost, gpt_version_used
 
 
 @st.cache_data
 def openAI_vision(user_prompt, image_url):
-    #response = openai.ChatCompletion.create(
     response = client.chat.completions.create(
         model="gpt-4-vision-preview",
         messages=[
@@ -73,8 +71,8 @@ def openAI_vision(user_prompt, image_url):
         ],
         max_tokens=500,
     )
-    prompt_tokens = response["usage"]["prompt_tokens"]
-    completion_tokens = response["usage"]["completion_tokens"]
+    prompt_tokens = response.usage.prompt_tokens
+    completion_tokens = response.usage.completion_tokens
         
     cost_per_token_input = 0.01
     cost_per_token_output = 0.03
