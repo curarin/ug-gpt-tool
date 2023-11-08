@@ -1,6 +1,8 @@
 #### import libraries
 import streamlit as st
 import hmac
+from bs4 import BeautifulSoup
+
 ### functions from other files
 import tabs.about as about_tab
 import tabs.tnd as tnd_tab
