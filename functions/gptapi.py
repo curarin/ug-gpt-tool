@@ -28,6 +28,7 @@ def openAI_content(system_act_as, user_prompt, temp_wanted, top_p_wanted, gpt_ve
         temperature=temp_wanted,
         top_p=top_p_wanted
     )
+    st.write(response)
     prompt_tokens = response["usage"]["prompt_tokens"]
     completion_tokens = response["usage"]["completion_tokens"]
     
