@@ -187,7 +187,7 @@ def sights_gen(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wante
     content_length_wanted_str = str(content_length_wanted)
     number_of_search_results_wanted_str = str(number_of_search_results_wanted)
     additional_usage_information = ",".join(filter(None, [number_of_sights_str, content_length_wanted_str, number_of_search_results_wanted_str]))
-    bq.to_bigquery("Sights Generator", all_cost_sights_update, destination_wanted, additional_usage_information, lang_wanted, st.session_state.name)
+    bq.to_bigquery("Sights Generator", all_cost_sights_update, destination_wanted, additional_usage_information, lang_wanted)
 
 
     st.divider()

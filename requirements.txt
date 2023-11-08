@@ -7,4 +7,4 @@ bs4
 requests
 pandas_gbq
 google-oauth2-tool
-streamlit_authenticator
+OpenAI

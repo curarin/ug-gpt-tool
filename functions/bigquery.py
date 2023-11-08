@@ -27,7 +27,7 @@ current_date = datetime.now().strftime("%Y-%m-%d")
 
 credentials = service_account.Credentials.from_service_account_info(service_account_info)
 
-def to_bigquery(tool, total_cost, destination, tool_specific_data, lang_wanted, name):
+def to_bigquery(tool, total_cost, destination, tool_specific_data, lang_wanted):
     destination = destination.lower()
     data = {
         'date': current_date,
@@ -36,7 +36,7 @@ def to_bigquery(tool, total_cost, destination, tool_specific_data, lang_wanted, 
         'destination': destination,
         'tool_specific_data': tool_specific_data,
         'language_used': lang_wanted,
-        'name': name
+        'name': None
         }
     # Create a DataFrame
     df = pd.DataFrame(data, index=[0])

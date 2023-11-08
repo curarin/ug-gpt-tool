@@ -2,21 +2,14 @@ import streamlit as st
 import streamlit_authenticator as stauth
 import yaml
 from yaml.loader import SafeLoader
-with open("credentials.yaml") as file:
-   config = yaml.load(file, Loader=SafeLoader)
 
 
 
 
-def sidebar(authentication_status, authenticator):
+def sidebar():
     st.image("https://mediafiles.urlaubsguru.de/wp-content/uploads/2023/06/Logo_UG_mit-claim.png")
     st.title("GPT-Tool")
-    if authentication_status:
-        st.markdown(f"<p>Hi there <b>{st.session_state.name}</b> 👋. Welcome to the Urlaubsguru GPT-App.</p>", unsafe_allow_html=True)
-        authenticator.logout("Logout", "sidebar")
-        st.divider()
-    else:
-        st.markdown("<p>Welcome to the Urlaubsguru GPT-Tool.</p>", unsafe_allow_html=True)
+    st.markdown("<p>Welcome to the Urlaubsguru GPT-Tool.</p>", unsafe_allow_html=True)
     st.markdown("<h3>General information:</h3>", unsafe_allow_html=True)
     st.markdown("<ul><li>Tools are located in the tabs on the main screen.</li><li>GPT settings can be made in the sidebar. These then apply to all tools.</li><li><b>Beware:</b> Selection of new parameters via input fields resets already queried data.</li></ul>", unsafe_allow_html=True)
     st.divider()
@@ -34,9 +27,9 @@ def sidebar(authentication_status, authenticator):
     st.markdown("<h4>GPT Settings</h4><p>Glossary can be found within 'About'-section</p>", unsafe_allow_html=True)
     gpt_version_wanted = st.selectbox("GPT Version", ["GPT-4", "GPT-3.5"])
     if gpt_version_wanted == "GPT-4":
-        gpt_version_wanted = "gpt-4"
+        gpt_version_wanted = "gpt-4-1106-preview"
     elif gpt_version_wanted == "GPT-3.5":
-        gpt_version_wanted = "gpt-3.5-turbo"
+        gpt_version_wanted = "gpt-3.5-turbo-1106"
         
     gpt_temp_wanted = st.slider("Temperatur - Standard: 0.7", 0.09, 1.0, 0.7, key = "sidebar slider gtp temp")
     gpt_top_p_wanted = st.slider("Top_p - Standard: 0.8", 0.09, 1.0, 0.8, key = "sidebar slider gtp top p")

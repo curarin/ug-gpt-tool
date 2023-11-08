@@ -1,16 +1,11 @@
 #### import libraries
 import streamlit as st
-import openai
-import json
 import pandas as pd
-import io
 from bs4 import BeautifulSoup
-import requests
-import string
+
 from requests.exceptions import RequestException
-import xlsxwriter
-import streamlit_authenticator as stauth
 import yaml
+import hmac
 
 ### functions from other files
 import functions.bingapifunction as bingapi
@@ -23,6 +18,7 @@ import tabs.sidebar as sidebar
 import tabs.headline_structure as headlines
 import tabs.beach_generation as beach
 import tabs.summary as summary
+import tabs.alt_tags as alt
 
 
 ########################################################################################################################
@@ -34,79 +30,74 @@ st.set_page_config(
     page_icon="🤖"
 )
 
-#creating login widget
-from yaml.loader import SafeLoader
-with open("credentials.yaml") as file:
-   config = yaml.load(file, Loader=SafeLoader)
-
-authenticator = stauth.Authenticate(
-    config['credentials'],
-    config['cookie']['name'],
-    config['cookie']['key'],
-    config['cookie']['expiry_days'],
-    config['preauthorized']
-)
-name, authentication_status, username = authenticator.login("Login", "main")
-#######
 ########################################################################################################################
 #### Sidebar
 with st.sidebar:
-    gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wanted = sidebar.sidebar(authentication_status, authenticator)
+    gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wanted = sidebar.sidebar()
 ########################################################################################################################
-if authentication_status:
-   tab1, tab2, tab5, tab4, tab6, tab3 = st.tabs([
+def check_password():
+    """Returns `True` if the user had a correct password."""
+
+    def login_form():
+        """Form with widgets to collect user information"""
+        with st.form("Credentials"):
+            st.text_input("Username", key="username")
+            st.text_input("Password", type="password", key="password")
+            st.form_submit_button("Log in", on_click=password_entered)
+
+    def password_entered():
+        """Checks whether a password entered by the user is correct."""
+        if st.session_state["username"] in st.secrets[
+            "passwords"
+        ] and hmac.compare_digest(
+            st.session_state["password"],
+            st.secrets.passwords[st.session_state["username"]],
+        ):
+            st.session_state["password_correct"] = True
+            del st.session_state["password"]  # Don't store the username or password.
+            del st.session_state["username"]
+        else:
+            st.session_state["password_correct"] = False
+
+    # Return True if the username + password is validated.
+    if st.session_state.get("password_correct", False):
+        return True
+
+    # Show inputs for username + password.
+    login_form()
+    if "password_correct" in st.session_state:
+        st.error("😕 User not known or password incorrect")
+    return False
+if not check_password():
+    st.stop()
+########################################################################
+tab1, tab2, tab5, tab4, tab6, tab7, tab3 = st.tabs([
       "🧙‍♂️ Title & Description |",
       "🏞️ Sights |",
       "🏖️ Beaches |",
       "🦄 Headlines + Content |",
       "🟰 Summaries |",
-      #"📸 Alt Texts |",
+      "📸 Alt Texts |",
       "❓ Prompts"
       ])
 
-   with tab1:
+with tab1:
       tnd_tab.tnd(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wanted)
 
-   with tab2:
+with tab2:
       sights_tab.sights_gen(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wanted)
       
-   with tab3:
+with tab3:
       about_tab.about()
 
-   with tab4:
+with tab4:
       headlines.structure(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wanted)
 
-   with tab5:
+with tab5:
       beach.beach_gen(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wanted)
 
-   with tab6:
+with tab6:
       summary.get_summary(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wanted)
-elif authentication_status == False:
-   st.error("Username/password is incorrect")
-elif authentication_status == None:
-   st.warning("Please enter your username and password")
-   st.divider()
-   st.subheader("Additional options")
 
-   login_col1, login_col2 = st.columns(2)
-   with login_col1:
-      try:
-         if authenticator.register_user("Register user", preauthorization=True):
-            st.success("User registered successfully")
-            with open("credentials.yaml", "w") as file:
-               yaml.dump(config, file, default_flow_style=False)
-      except Exception as e:
-         st.error(e)
-
-   with login_col2:
-      try:
-         username_of_forgotten_password, email_of_forgotten_password, new_random_password = authenticator.forgot_password('Forgot password')
-         if username_of_forgotten_password:
-            st.success(f'New password sent to {email_of_forgotten_password}') # update to be sent via EMAIL
-            with open("credentials.yaml", "w") as file:
-               yaml.dump(config, file, default_flow_style=False)
-         else:
-            st.error('Username not found')
-      except Exception as e:
-         st.error(e)
-
+with tab7:
+     alt.generate_alt_text(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wanted)

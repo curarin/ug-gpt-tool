@@ -87,3 +87,10 @@ def beach_prompts(number_of_beaches_wanted, destination_wanted, beaches_not_need
 def new_beach_prompt(content_length_wanted_beaches, beach, destination_wanted_for_beach, lang_wanted):
     content_prompt_new_sight = f"Antworte auf {lang_wanted}. Erzähle etwas über den Strand {beach}. Maximal {content_length_wanted_beaches} Worte. Was macht ihn so besonders? Warum muss man als Tourist dort hin? Was zeichnet diesen Strand aus im Vergleich zu anderen Stränden in {destination_wanted_for_beach}? Verwende malerische Sprache. Du bist Per Du mit der Leserschaft. Du sprichst die Leserschaft im Plural an. Stelle sicher, dass der Text die Leser dazu ermutigt {beach} zu besuchen."
     return content_prompt_new_sight
+
+
+#### prompts für alt text
+
+def alt_tag_prompts(lang_wanted, image_url, image_context):
+    content_prompt_alt_text = f"Verfasse einen Alt Text für das Bild {image_url} in einem (1) Satz auf {lang_wanted}. Stelle dir vor, du möchtest einer sehbeeinträchgiten Person erklären, was auf dem Bild zu sehen ist im Kontext von {image_context}. Welche Elemente siehst du? Wo sind sie platziert? Welche Emotionen werden dabei geweckt? Schreibe nicht 'das Bild zeigt...' sondern beschreibe es direkt."
+    return content_prompt_alt_text

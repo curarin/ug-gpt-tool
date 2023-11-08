@@ -91,7 +91,7 @@ def structure(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wanted
     if st.button(f"Generate {st.session_state.nr_of_headlines_wanted} headlines :rocket:"):
         st.session_state.act_as_prompt_headlines, st.session_state.content_prompt_headlines = gptprompts.headline_structure_prompt(lang_wanted, st.session_state.nr_of_headlines_wanted, st.session_state.goal_choice, st.session_state.target_audience, st.session_state.target_topic, st.session_state.page_type)
         st.session_state.headlines_generated, st.session_state.headlines_generated_cost, st.session_state.headlines_generated_gptversion = gptapi.openAI_content(st.session_state.act_as_prompt_headlines, st.session_state.content_prompt_headlines, gpt_temp_wanted, gpt_top_p_wanted, gpt_version_wanted)
-        bq.to_bigquery("Headline Generator", st.session_state.headlines_generated_cost, "Headlines", st.session_state.target_topic, lang_wanted, st.session_state.name)
+        bq.to_bigquery("Headline Generator", st.session_state.headlines_generated_cost, "Headlines", st.session_state.target_topic, lang_wanted)
 
         try:
             headlines_list = json.loads(st.session_state.headlines_generated)
@@ -143,7 +143,7 @@ def structure(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wanted
                             """, unsafe_allow_html=True)
             total_cost_content_for_headlines = sum(headline_content_generated_cost_list)
             st.session_state.content_for_headings_generated = True
-            bq.to_bigquery("Headline Generator", total_cost_content_for_headlines, "Content for Headlines", st.session_state.target_topic, lang_wanted, st.session_state.name)
+            bq.to_bigquery("Headline Generator", total_cost_content_for_headlines, "Content for Headlines", st.session_state.target_topic, lang_wanted)
         st.divider()
 
     #### generate conclusion / summary
@@ -164,4 +164,4 @@ def structure(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wanted
             st.markdown(f"""<h5>Summary for {st.session_state.target_topic}</h5>
                     {summary_content_created}
                         """, unsafe_allow_html=True)
-            bq.to_bigquery("Headline Generator", summary_content_created_cost, "Summary for Headlines", st.session_state.target_topic, lang_wanted, st.session_state.name)
+            bq.to_bigquery("Headline Generator", summary_content_created_cost, "Summary for Headlines", st.session_state.target_topic, lang_wanted)

@@ -172,7 +172,7 @@ def tnd(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wanted):
         special_info_template_str = str(special_info_template)
         additional_usage_information = ",".join(filter(None, [tnd_template_choice, special_info_template_str]))
 
-        bq.to_bigquery("TND Generator", total_cost_tnd, focus_keyword_input, additional_usage_information, lang_wanted, st.session_state.name)
+        bq.to_bigquery("TND Generator", total_cost_tnd, focus_keyword_input, additional_usage_information, lang_wanted)
 
     ## Template Input - z.B. "Sehenswürdigkeiten" hat ne eigene Struktur, "Urlaubsziele Seite" hat ne eigene Struktur etc.
     ## Hier Input zum Fokus Keyword / Main Keyword, z.B. "Aktivitäten Amsterdam", steht dann ganz vorne im Title

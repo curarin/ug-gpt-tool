@@ -128,7 +128,7 @@ def beach_gen(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wanted
     number_of_sights_str = str(number_of_beaches_wanted)
     content_length_wanted_str = str(content_length_wanted_beaches)
     additional_usage_information = ",".join(filter(None, [number_of_sights_str, content_length_wanted_str]))
-    bq.to_bigquery("Beaches Generator", all_cost_beaches_update, destination_wanted_for_beach, additional_usage_information, lang_wanted, st.session_state.name)
+    bq.to_bigquery("Beaches Generator", all_cost_beaches_update, destination_wanted_for_beach, additional_usage_information, lang_wanted)
 
 
     st.divider()
