@@ -1,8 +1,5 @@
 import streamlit as st
 
-
-
-
 def sidebar():
     st.image("https://mediafiles.urlaubsguru.de/wp-content/uploads/2023/06/Logo_UG_mit-claim.png")
     st.title("GPT-Tool")

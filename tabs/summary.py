@@ -24,8 +24,8 @@ def get_summary(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_want
                 <li>Depending on the summary type you can get more facts or broader concepts of your source.</li>
                </ul>""", unsafe_allow_html=True)
     st.divider()
-       ### Input Fields
     
+    ### Input Fields
     st.subheader("Summary from webpages")
     col1_get_content_summary, col2_get_content_summary = st.columns(2)
     with col1_get_content_summary:
