@@ -8,6 +8,8 @@ import io
 from bs4 import BeautifulSoup
 import requests
 import string
+from openai import OpenAI
+
 
 ###GPT API KEY
 OPENAI_API_KEY = st.secrets["openai_api_key"]
