@@ -13,7 +13,7 @@ from openai import OpenAI
 ###GPT API KEY
 OPENAI_API_KEY = st.secrets["openai_api_key"]
 openai.api_key = OPENAI_API_KEY
-client = OpenAI()
+client = OpenAI(api_key=OPENAI_API_KEY)
 
 ####
 
