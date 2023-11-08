@@ -3,6 +3,11 @@ import openai
 import pandas as pd
 from bs4 import BeautifulSoup
 from requests.exceptions import RequestException
+import json
+import io
+from bs4 import BeautifulSoup
+import requests
+import string
 
 ###GPT API KEY
 OPENAI_API_KEY = st.secrets["openai_api_key"]
