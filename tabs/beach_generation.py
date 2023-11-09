@@ -12,7 +12,6 @@ import xlsxwriter
 
 ### functions from other files
 import functions.scrapingfunction as scrapingfunction
-import functions.bingapifunction as bingapi
 import functions.gptapi as gptapi
 import prompts.prompts as gptprompts
 import functions.bigquery as bq

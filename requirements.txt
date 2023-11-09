@@ -8,3 +8,4 @@ requests
 pandas_gbq
 google-oauth2-tool
 lxml
+advertools

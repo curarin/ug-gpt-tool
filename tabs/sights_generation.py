@@ -12,7 +12,7 @@ import xlsxwriter
 
 ### functions from other files
 import functions.scrapingfunction as scrapingfunction
-import functions.bingapifunction as bingapi
+import functions.googlesearch as googleapi
 import functions.gptapi as gptapi
 import prompts.prompts as gptprompts
 import functions.bigquery as bq
@@ -55,15 +55,22 @@ def sights_gen(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wante
 
    col1_sights_top_info, col2_sights_top_info = st.columns(2)
    with col1_sights_top_info:
-    number_of_sights_wanted = st.number_input("Number of additional sights required", min_value=1, max_value=25, value=5, placeholder="Enter number of additional sights...", key = "main number of sights wanted input")    
-    content_length_wanted = st.slider("Approximate number of words per sight", 200, 1500, 500, key = "main slider content length per sight")
-    number_of_search_results_wanted = st.number_input("How many top search results should be crawled for opening times & ticket prices?", min_value=1, max_value=5, value=3, placeholder="Enter number of crawling results...", key = "number of sights wanted for upgrading")
-
-    
-   with col2_sights_top_info:
     destination_wanted = st.text_input("Which destination needs additional sights?")
     sights_not_needed = st.text_area("Which sights are currently mentioned? _Note: 1 sight = 1 line_")
     sights_not_needed = [sights_not_needed.strip() for sights_not_needed in sights_not_needed.split("\n")]
+    number_of_sights_wanted = st.number_input("Number of additional sights required", min_value=1, max_value=25, value=5, placeholder="Enter number of additional sights...", key = "main number of sights wanted input")    
+    content_length_wanted = st.slider("Approximate number of words per sight", 200, 1500, 500, key = "main slider content length per sight")
+    
+    
+   with col2_sights_top_info:
+    st.markdown("**Get current data for ticket prizes and opening hours from google:**")
+    if lang_wanted == "Deutsch":
+       country_wanted = st.selectbox("Choose country for google results", ["Deutschland", "Österreich", "Schweiz"], key = "selectbox country input")
+    else:
+       country_wanted = ""
+    number_of_search_results_wanted = st.number_input("How many top search results should be crawled for opening times & ticket prices?", min_value=1, max_value=5, value=3, placeholder="Enter number of crawling results...", key = "number of sights wanted for upgrading")
+
+
    
    ### hier started der API Call
 
@@ -92,7 +99,7 @@ def sights_gen(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wante
     
     ### Loop through sights and generate content
     sight_content_cost = []
-    bing_results_cost = []
+    serp_results_cost = []
     i = 0
     for new_sight in sight_list_for_update:
        #### Print current state to App
@@ -111,32 +118,35 @@ def sights_gen(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wante
        
        # build queries for bing and get results 
        if lang_wanted == "Deutsch":
-        sight_cost = new_sight + " Eintrittspreise"
-        sight_zeiten = new_sight + " Öffnungszeiten"
+            sight_cost = new_sight + " Eintrittspreise"
+            sight_zeiten = new_sight + " Öffnungszeiten"
        elif lang_wanted == "Spanisch":
-        sight_cost =  "entrada " + new_sight
-        sight_zeiten =  "horario " + new_sight
+            sight_cost =  "entrada " + new_sight
+            sight_zeiten =  "horario " + new_sight
        elif lang_wanted == "Holländisch":
-        sight_cost = "prijzen " + new_sight
-        sight_zeiten = new_sight + " openingstijden"
+            sight_cost = "prijzen " + new_sight
+            sight_zeiten = new_sight + " openingstijden"
        elif lang_wanted == "Englisch":
-        sight_cost = new_sight + " entry fee"
-        sight_zeiten = new_sight + " opening hours"
+            sight_cost = new_sight + " entry fee"
+            sight_zeiten = new_sight + " opening hours"
 
-       links_zeiten_bing = bingapi.bing_top_result(sight_zeiten, number_of_search_results_wanted, lang_wanted)
-       links_kosten_bing = bingapi.bing_top_result(sight_cost, number_of_search_results_wanted, lang_wanted)
+        
+        
+       links_zeiten_google = googleapi.google_serp(sight_zeiten, number_of_search_results_wanted, lang_wanted, country_wanted)
+       links_kosten_google = googleapi.google_serp(sight_cost, number_of_search_results_wanted, lang_wanted, country_wanted)
+
        
        # ### generate content from bing result pages
        opening_hours_dict = {}
-       for link in links_zeiten_bing:
+       for link in links_zeiten_google:
            zeiten, zeiten_cost = scrapingfunction.extract_text_from_url(link, "oeffnungszeiten", lang_wanted)
-           bing_results_cost.append(zeiten_cost)
+           serp_results_cost.append(zeiten_cost)
            opening_hours_dict[link] = zeiten
        
        ticket_prices_dict = {}
-       for link in links_kosten_bing:
+       for link in links_kosten_google:
            kosten, kosten_cost = scrapingfunction.extract_text_from_url(link, "eintrittskosten", lang_wanted)
-           bing_results_cost.append(kosten_cost)
+           serp_results_cost.append(kosten_cost)
            ticket_prices_dict[link] = kosten
 
        
@@ -172,13 +182,13 @@ def sights_gen(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wante
     
     ### Kosten berechnen
     total_sight_content_cost = sum(sight_content_cost)
-    total_bing_cost = sum(bing_results_cost)
+    total_serp_cost = sum(serp_results_cost)
 
 
     all_cost_sights_update = (
        top_sights_cost +
        total_sight_content_cost +
-       total_bing_cost
+       total_serp_cost
        )
     all_cost_sights_update = round(all_cost_sights_update, 5)
     
