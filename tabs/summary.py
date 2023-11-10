@@ -10,7 +10,6 @@ import requests
 
 #functions from other files
 import functions.gptapi as gptapi
-import prompts.prompts as gptprompts
 import functions.gptapi as gptapi
 import functions.bigquery as bq
 import functions.scrapingfunction as scraping

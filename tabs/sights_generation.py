@@ -95,8 +95,10 @@ def sights_gen(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wante
     
     sight_list_for_update = output_list_for_update
     st.subheader("These sights are going to be added:")
-    st.write(sight_list_for_update)
-    
+    for sight_to_be_added in sight_list_for_update:
+        st.write(sight_to_be_added)
+    st.divider()
+
     ### Loop through sights and generate content
     sight_content_cost = []
     serp_results_cost = []
@@ -171,13 +173,7 @@ def sights_gen(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wante
                 <h4>Entry fees for {new_sight}</h4>
                 <p>{dict_to_html_list(ticket_prices_dict)}</p>
                 """, unsafe_allow_html=True)
-       #sights_data_dict = {}
-       #sights_data_dict["Name der Sehenswürdigkeit"] = new_sight
-       #sights_data_dict["Beschreibung der Sehenswürdigkeit"] = new_sight_content
-       #sights_data_dict["Bilder Tipp"] = new_sight_pic_content
-       #sights_data_dict["Öffnungszeiten inkl. Quelle"] = opening_hours_dict
-       #sights_data_dict["Ticketpreise inkl. Quelle"] = ticket_prices_dict
-       #st.write(sights_data_dict)
+       st.divider()
     
     
     ### Kosten berechnen
@@ -200,7 +196,6 @@ def sights_gen(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wante
     bq.to_bigquery("Sights Generator", all_cost_sights_update, destination_wanted, additional_usage_information, lang_wanted)
 
 
-    st.divider()
     #### Implement Download button which caches the data
     st.subheader("Download generated data")
     @st.cache_data
@@ -212,13 +207,6 @@ def sights_gen(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wante
         return excel_data
     new_sights_excel = convert_df_to_excel(df_html_new_sights)
 
-    st.download_button("Download beach content as Excel-spreadsheet", data=new_sights_excel, file_name=f"{destination_wanted}_new_sights.xlsx", mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    st.download_button(f"Download sight conbtent for {destination_wanted} as Excel-spreadsheet", data=new_sights_excel, file_name=f"{destination_wanted}_new_sights.xlsx", mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
     st.divider()
     #####################
-    st.subheader("Recap of latest request")
-    st.markdown(f"""
-                <ul>
-                <li><b>Choosen destination:</b> {destination_wanted}</li>
-                <li><b>Number of sights:</b> {number_of_sights_wanted}</li>
-                <li><b>Cost:</b> {all_cost_sights_update} USD</li>
-                </ul>""", unsafe_allow_html=True)

@@ -144,3 +144,35 @@ def about():
                     </ul>
 
                     </ul>""", unsafe_allow_html=True)
+    st.divider()
+    ############################################################################################################################################################
+    with st.expander("Generate summaries from content pieces: Prompts overview (click to expand)"):
+        st.markdown(f"""<h6>Generic Prompt</h6>
+                    <ul>
+                    <li>Antworte mir Deutsch. Erstelle mir eine Zusammenfassung. Nutze diese Art der Zusammenfassung: 'Beispiel'. Inhalt: 'Scraping Resultat'</li>
+                    </ul>
+                    <br>
+                    <h6>Types of Summary Types</h6>
+                    <ul>
+                    <li><b>Most important informations:</b> Fasse mir den Text als Informative Zusammenfassung zusammen und konzentriere dich auf die Übertragung der wichtigsten Informationen aus dem Text. Sei sachlich und stelle die Fakten klar dar. Kommuniziere mir Daten und Fakten. </li>
+                    <li><b>Very short with key aspects:</b> Fasse mir den Text kurz und knapp als Kurze Zusammenfassung zusammen. Konzetriere dich auf das absolute Minimum an Informationen, um den Hauptpunkt des Textes zu vermitteln. Kommuniziere mir Daten und Fakten.</li>
+                    <li><b>Focus on broader topics:</b> Hebe die Hauptthemen und Konzepte des Textes hervor. Ignoriere dabei die Details. Ich möchte mich auf die großen Ideen konzentrieren. </li>
+                    <li><b>Chronological summary:</b> Fasse die Reihenfolge von Ereignissen oder Informationen im Text zusammen mittels Chronologischer Zusammenfassung.  Kommuniziere mir Daten und Fakten.</li>
+                    <li><b>Facts focused:</b> Fasse den Text mittels Statistischer Zusammenfassung zusammen. Hebe statistische Daten oder Fakten aus dem Text hervor.  Kommuniziere mir Daten und Fakten.</li>
+                    </ul>
+                    """, unsafe_allow_html=True)
+    st.divider()
+    ############################################################################################################################################################
+    with st.expander("Generate alt text: Prompts overview (click to expand)"):
+        st.subheader("Alt Text Prompts")
+        alt_text_prompt = gptprompts.alt_tag_prompts("Deutsch", "https://mediafiles.urlaubsguru.de/wp-content/uploads/2022/03/Museum-Square-in-the-borough-Amsterdam-South_shutterstock_245364502.jpg", "Sehenswürdigkeiten Amsterdam")
+        st.markdown(f"""<h6>Generate alt text prompt</h6>
+                    <ul>
+                    <li><b>Language:</b> Deutsch</li>
+                    <li><b>Image URL:</b> https://mediafiles.urlaubsguru.de/wp-content/uploads/2022/03/Museum-Square-in-the-borough-Amsterdam-South_shutterstock_245364502.jpg</li>
+                    <li><b>Topic selected:</b> Sehenswürdigkeiten Amsterdam</li>
+                    </ul>
+                    <br>
+                    <h6>Final prompt</h6>
+                    <p>{alt_text_prompt}</p>
+                    """, unsafe_allow_html=True)
