@@ -18,9 +18,7 @@ def about():
                     <li><b><u>Temperature</u></b>: Temperature is a parameter that controls the creativity of the language model (GPT4). The higher the temperature (0.1 - 1), the more diverse and creative the output. The lower the temperature, the more reproducible and focused the output.</li>
                     <li><b><u>Top_p</u></b>: Language models select the order of words according to the frequency with which they occur in the training data. Thus, in the context of a sentence or a word, the 'next most likely' word is always selected. The top_p value now controls whether only the top 10% (top_p = 0.1) should be used or whether a larger data pool should be fished (top_p = 0.5 correspond to the top 50%).</li>
                     </ul>""", unsafe_allow_html=True)
-    st.divider()
-    ############################################################################################################################################################
-    st.subheader("Find all prompts here")
+    
     with st.expander("Generic GPT-Settings Overview (Click to expand)"):
         st.subheader("General GPT-4 settings")
         st.markdown("<p>GPT-4 has been fine-tuned for Creative Writing.</p>", unsafe_allow_html=True)
@@ -28,7 +26,9 @@ def about():
                     <li><b><u>Temperature</u></b>: 0.7</li>
                     <li><b><u>Top_p</u></b>: 0.8</li></ul>
                     <p>GPT now generates creative and diverse content made for storytelling. The output is exploratory and adheres less to existing patterns from the training data.</p>""", unsafe_allow_html=True)
+    st.divider()
     ############################################################################################################################################################
+    st.subheader("Find all prompts here")
     with st.expander("Titles & Description Generator: Prompts (click to expand)"):
         st.subheader("Titles & Description Generator: Prompts")
         ### code für prompts
