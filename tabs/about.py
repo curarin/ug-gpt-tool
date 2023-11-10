@@ -20,6 +20,7 @@ def about():
                     </ul>""", unsafe_allow_html=True)
     st.divider()
     ############################################################################################################################################################
+    st.subheader("Find all prompts here")
     with st.expander("Generic GPT-Settings Overview (Click to expand)"):
         st.subheader("General GPT-4 settings")
         st.markdown("<p>GPT-4 has been fine-tuned for Creative Writing.</p>", unsafe_allow_html=True)
@@ -27,7 +28,6 @@ def about():
                     <li><b><u>Temperature</u></b>: 0.7</li>
                     <li><b><u>Top_p</u></b>: 0.8</li></ul>
                     <p>GPT now generates creative and diverse content made for storytelling. The output is exploratory and adheres less to existing patterns from the training data.</p>""", unsafe_allow_html=True)
-    st.divider()
     ############################################################################################################################################################
     with st.expander("Titles & Description Generator: Prompts (click to expand)"):
         st.subheader("Titles & Description Generator: Prompts")
@@ -87,7 +87,6 @@ def about():
                     <li><b><u>Content Prompt:</u></b> {uz_content_prompt_descr}</li>                
                     """, unsafe_allow_html=True)
         
-    st.divider()
     ############################################################################################################################################################
     with st.expander("Generate new sights content: Prompts overview (click to expand)"):
         st.subheader("Expand sights: Prompts")
@@ -104,7 +103,6 @@ def about():
                     <li><b><u>Prompt for summary of opening hours:</u></b> {oeffnungszeiten_prompt}</li>
                     <li><b><u>Prompt for the summary of admission prices:</u></b> {eintrittskosten_prompt}</li>
                     </ul>""", unsafe_allow_html=True)
-    st.divider()
     ############################################################################################################################################################
     with st.expander("Generate new beaches content: Prompts overview (click to expand)"):
         st.subheader("Expand beaches: Prompts")
@@ -116,7 +114,6 @@ def about():
                     <li><b><u>Sample structure prompt:</u></b> {structure_prompt_beach}</li>
                     <li><b><u>Exemplary prompt for each new beach:</u></b> {content_prompt_new_beach}</li>
                     </ul>""", unsafe_allow_html=True)
-    st.divider()
     ############################################################################################################################################################
     with st.expander("Generate new headlines and content: Prompts overview (click to expand)"):
         st.subheader("New headlines and content: Prompts")
@@ -144,7 +141,6 @@ def about():
                     </ul>
 
                     </ul>""", unsafe_allow_html=True)
-    st.divider()
     ############################################################################################################################################################
     with st.expander("Generate summaries from content pieces: Prompts overview (click to expand)"):
         st.markdown(f"""<h6>Generic Prompt</h6>
@@ -161,7 +157,6 @@ def about():
                     <li><b>Facts focused:</b> Fasse den Text mittels Statistischer Zusammenfassung zusammen. Hebe statistische Daten oder Fakten aus dem Text hervor.  Kommuniziere mir Daten und Fakten.</li>
                     </ul>
                     """, unsafe_allow_html=True)
-    st.divider()
     ############################################################################################################################################################
     with st.expander("Generate alt text: Prompts overview (click to expand)"):
         st.subheader("Alt Text Prompts")
