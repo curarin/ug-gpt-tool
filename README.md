@@ -24,5 +24,9 @@ Depending on the specific use case you can either generate headlines, which are 
 <img width="1056" alt="Screenshot 2023-10-27 at 11 00 39" src="https://github.com/curarin/ug-gpt-tool/assets/145868208/aa29e2ce-0bf3-4086-aabb-32222a5cf0d6">
 
 ### Use Case 5: Receive summaries for articles
-You can put in a url and the script scrapes the content of the url and passes the content to GPT in order to summarize it. Since gpt has a token restriction the request gets split in many different parts, depending on the length of the scraped content.
+You can put in a url and the script scrapes the content of the url and passes the content to GPT in order to summarize it.
 <img width="1030" alt="Screenshot 2023-10-27 at 10 56 18" src="https://github.com/curarin/ug-gpt-tool/assets/145868208/cb0c8c16-7a3a-4f59-b2be-d15ceee3f341">
+
+### Use Case 6: Alt Text Generation 
+You can either put in a Image URL or the URL of the whole article and generate an alt text for the given image. When using the bulk export Im using Advertools for scraping all image urls from the given article.
+![Screenshot 2023-11-15 at 11 29 53](https://github.com/curarin/ug-gpt-tool/assets/145868208/1f572069-db87-4eea-b4f4-4c0affa554d0)
