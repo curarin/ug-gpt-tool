@@ -94,3 +94,34 @@ def new_beach_prompt(content_length_wanted_beaches, beach, destination_wanted_fo
 def alt_tag_prompts(lang_wanted, image_url, image_context):
     content_prompt_alt_text = f"Verfasse einen Alt Text für das Bild {image_url} in einem (1) Satz auf {lang_wanted}. {image_context} sollte vorkommen. Stelle dir vor, du möchtest einer sehbeeinträchgiten Person erklären, was auf dem Bild zu sehen ist im Kontext von {image_context}. Welche Elemente siehst du? Wo sind sie platziert? Welche Emotionen werden dabei geweckt? Schreibe nicht 'das Bild zeigt...' sondern beschreibe es direkt."
     return content_prompt_alt_text
+
+
+#### prompts for product data
+def product_text_prompt(lang_wanted,  angebotsdetails, emojis_wanted, headline, vorteilskommunikation, exlusiv_angebot):
+    if emojis_wanted == False:
+        act_as_prompt_product = f"Antworte auf {lang_wanted}. Du bist Produkt-Spezialist bei einem Reiseunternehmen. Du verfasst Angebote für ganz besondere Unterkünfte und Destinationen. Du bist mit den Lesern Per Du, sprichst sie im Plural an (ihr/euch)."
+    elif emojis_wanted == True:
+        act_as_prompt_product = f"Antworte auf {lang_wanted}. Du bist Produkt-Spezialist bei einem Reiseunternehmen. Du verfasst Angebote für ganz besondere Unterkünfte und Destinationen. Du bist mit den Lesern Per Du, sprichst sie im Plural an (ihr/euch). Verwende passende Emojis."
+
+    product_text_prompt_no_voucher = f"Verfasse eine Angebotsbeschreibung mit maximal 3 Absätzen. Formuliere einen ansprechenden Text über das Angebot selbst. Gehe dabei auf das generelle Thema ein ({headline}) und konzentriere dich auf die Vorteilskommunikation ({vorteilskommunikation}. Anschließend erwähnst du wichtige Details über das Angebot ({angebotsdetails}). Schließe den Text mit einem Schluss ab, das Lust auf die Reise wecken soll."
+    title_tag_prompt = f"Verfasse einen Google Title Tag mit maximal 60 Zeichen, der besonderes Augenmerk auf die Besonderheit {headline} legt. Das muss vorhanden sein. Kommuniziere außerdem {vorteilskommunikation}."
+    description_tag_prompt = f"Verfasse eine Google Meta Description mit maximal 150 Zeichen. Die Description soll den User am Anfang mit seinem Bedürfnis abholen, dass er hat wenn er nach '{headline} {vorteilskommunikation}' sucht, danach kommunizierst du {exlusiv_angebot}. Achte auf Emotionalität. Die Google Meta Description soll die Vorfreude auf das Angebot wecken und zum kaufen verleiten. Am Ende soll ein Call to Action folgen, der Buchungsinteresse wecken soll."
+    h1_prompt = f"Verfasse eine Hauptüberschrift (H1) mit maximal 60 Zeichen. Im Fokus stehen sollte {headline} sowie {vorteilskommunikation}"
+    subheader_prompt = f"Verfasse eine Subheader mit maximal 60 Zeichen. Wichtig ist hier insbesondere {angebotsdetails} und soll zum weiterlesen und buchen anregen."
+
+    return product_text_prompt_no_voucher, act_as_prompt_product, title_tag_prompt, description_tag_prompt, h1_prompt, subheader_prompt
+
+def product_text_prompt_with_voucher(lang_wanted,  angebotsdetails, emojis_wanted, headline, vorteilskommunikation, exlusiv_angebot, gutscheincode, einloesezeitraum_start, einloesezeitraum_ende, mindestbestellwert, gueltig_bis):
+    if emojis_wanted == False:
+        act_as_prompt_product = f"Antworte auf {lang_wanted}. Du bist Produkt-Spezialist bei einem Reiseunternehmen. Du verfasst Angebote für ganz besondere Unterkünfte und Destinationen. Bei dem Angebot geht es ganz speziell um den Fokus auf {exlusiv_angebot}. Du bist mit den Lesern Per Du, sprichst sie im Plural an (ihr/euch)."
+    elif emojis_wanted == True:
+        act_as_prompt_product = f"Antworte auf {lang_wanted}. Du bist Produkt-Spezialist bei einem Reiseunternehmen. Du verfasst Angebote für ganz besondere Unterkünfte und Destinationen. Bei dem Angebot geht es ganz speziell um den Fokus auf {exlusiv_angebot}. Du bist mit den Lesern Per Du, sprichst sie im Plural an (ihr/euch). Verwende passende Emojis. "
+    
+    product_text_prompt_with_voucher = f"Verfasse eine Angebotsbeschreibung mit maximal 3 Absätzen. Die Struktur ist dabei in zwei Bereiche gegliedert: Zunächst sprichst du über den Gutschein, danach über das Angebot. Für den Gutschein ziehst du folgende Informationen heran: Den Gutschein-Code ({gutscheincode}), den Einlösezeitraum (Startdatum: {einloesezeitraum_start} sowie Enddatum: {einloesezeitraum_ende}), den Mindestbestellwert ({mindestbestellwert}) sowie die allgemeine Gültigkeit ({gueltig_bis}. Anschließend formulierst du einen ansprechenden Text über das Angebot selbst. Gehe dabei auf das generelle Thema ein ({headline}) und konzentriere dich auf die Vorteilskommunikation ({vorteilskommunikation}. Anschließend erwähnst du wichtige Details über das Angebot ({angebotsdetails}). Schließe den Text mit einem Schluss ab, das Lust auf die Reise wecken soll."
+    headline_prompt = f"Verfasse einen Google Title Tag mit maximal 60 Zeichen, der besonderes Augenmerk auf die Besonderheit {headline} legt. Das muss vorhanden sein. Kommuniziere außerdem {vorteilskommunikation}."
+    description_prompt = f"Verfasse eine Google Meta Description mit maximal 150 Zeichen. Die Description soll den User am Anfang mit seinem Bedürfnis abholen, dass er hat wenn er nach '{headline} {vorteilskommunikation}' sucht, danach kommunizierst du {exlusiv_angebot}. Achte auf Emotionalität. Die Google Meta Description soll die Vorfreude auf das Angebot wecken und zum kaufen verleiten. Am Ende soll ein Call to Action folgen, der Buchungsinteresse wecken soll."
+    h1_prompt = f"Verfasse eine Hauptüberschrift (H1) mit maximal 60 Zeichen. Im Fokus stehen sollte {headline} sowie {vorteilskommunikation}. Erwähne außerdem, dass es einen Gutschein gibt. "
+    subheader_prompt = f"Verfasse eine Subheader mit maximal 60 Zeichen. Wichtig ist hier insbesondere {angebotsdetails} und die Möglichekit eines Gutscheins. Soll zum weiterlesen und buchen anregen."
+
+    return product_text_prompt_with_voucher, act_as_prompt_product, headline_prompt, description_prompt, h1_prompt, subheader_prompt
+

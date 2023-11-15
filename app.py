@@ -12,6 +12,7 @@ import tabs.headline_structure as headlines
 import tabs.beach_generation as beach
 import tabs.summary as summary
 import tabs.alt_tags as alt
+import tabs.product_descriptions as deal_content
 
 
 ########################################################################################################################
@@ -64,13 +65,14 @@ def check_password():
 if not check_password():
     st.stop()
 ########################################################################
-tab1, tab2, tab5, tab4, tab6, tab7, tab3 = st.tabs([
+tab1, tab2, tab5, tab4, tab6, tab7, tab8, tab3 = st.tabs([
       "🧙‍♂️ Title & Description |",
       "🏞️ Sights |",
       "🏖️ Beaches |",
       "🦄 Headlines + Content |",
       "🟰 Summaries |",
       "📸 Alt Texts |",
+      "🤝 Deal Content |",
       "❓ Prompts"
       ])
 
@@ -91,6 +93,9 @@ with tab5:
 
 with tab6:
       summary.get_summary(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wanted)
+
+with tab8:
+     deal_content.generate_product_description(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wanted)
 
 with tab7:
      alt.generate_alt_text(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wanted)

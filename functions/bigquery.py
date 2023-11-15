@@ -60,10 +60,12 @@ def fetch_total_cost_current_month():
     total_sum = grouped_tool_cost['total_cost'].sum()
     total_row = pd.DataFrame({'': ['Gesamtkosten'], 'Kosten im aktuellen Monat (in USD)': [total_sum]})
 
+    grouped_tool_cost = grouped_tool_cost.sort_values(by = "total_cost", ascending = False)
     grouped_tool_cost = grouped_tool_cost.rename(columns={
         "tool": "GPT Tool Name",
         "total_cost": "Kosten im aktuellen Monat (in USD)"
     })
+
 
     st.write(grouped_tool_cost)
     st.write(total_row)
