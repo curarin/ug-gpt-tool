@@ -27,7 +27,8 @@ st.set_page_config(
 ########################################################################################################################
 #### Sidebar
 with st.sidebar:
-    gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wanted = sidebar.sidebar()
+    gpt_version_wanted, gpt_temp_wanted, lang_wanted = sidebar.sidebar()
+
 ########################################################################################################################
 def check_password():
     """Returns `True` if the user had a correct password."""
@@ -77,25 +78,25 @@ tab1, tab2, tab5, tab4, tab6, tab7, tab8, tab3 = st.tabs([
       ])
 
 with tab1:
-      tnd_tab.tnd(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wanted)
+      tnd_tab.tnd(gpt_version_wanted, gpt_temp_wanted, lang_wanted)
 
 with tab2:
-      sights_tab.sights_gen(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wanted)
+      sights_tab.sights_gen(gpt_version_wanted, gpt_temp_wanted, lang_wanted)
       
 with tab3:
       about_tab.about()
 
 with tab4:
-      headlines.structure(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wanted)
+      headlines.structure(gpt_version_wanted, gpt_temp_wanted, lang_wanted)
 
 with tab5:
-      beach.beach_gen(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wanted)
+      beach.beach_gen(gpt_version_wanted, gpt_temp_wanted, lang_wanted)
 
 with tab6:
-      summary.get_summary(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wanted)
+      summary.get_summary(gpt_version_wanted, gpt_temp_wanted, lang_wanted)
 
 with tab8:
-     deal_content.generate_product_description(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wanted)
+     deal_content.generate_product_description(gpt_version_wanted, gpt_temp_wanted, lang_wanted)
 
 with tab7:
-     alt.generate_alt_text(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wanted)
+     alt.generate_alt_text(gpt_version_wanted, gpt_temp_wanted, lang_wanted)

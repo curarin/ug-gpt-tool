@@ -18,15 +18,14 @@ client = OpenAI(api_key=OPENAI_API_KEY)
 ####
 
 @st.cache_data
-def openAI_content(system_act_as, user_prompt, temp_wanted, top_p_wanted, gpt_version):
+def openAI_content(system_act_as, user_prompt, temp_wanted, gpt_version):
     response = client.chat.completions.create( #).ChatCompletion.create(
         model=gpt_version,
         messages=[
             {"role": "system", "content": system_act_as},
             {"role": "user", "content": user_prompt}
         ],
-        temperature=temp_wanted,
-        top_p=top_p_wanted
+        temperature=temp_wanted
     )
     prompt_tokens = response.usage.prompt_tokens
     completion_tokens = response.usage.completion_tokens

@@ -26,6 +26,7 @@ def about():
                     <li><b><u>Temperature</u></b>: 0.7</li>
                     <li><b><u>Top_p</u></b>: 0.8</li></ul>
                     <p>GPT now generates creative and diverse content made for storytelling. The output is exploratory and adheres less to existing patterns from the training data.</p>""", unsafe_allow_html=True)
+
     st.divider()
     ############################################################################################################################################################
     st.subheader("Find all prompts here")

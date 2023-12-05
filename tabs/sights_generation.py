@@ -25,7 +25,7 @@ def dict_to_html_list(data):
     return html
 
 
-def sights_gen(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wanted):
+def sights_gen(gpt_version_wanted, gpt_temp_wanted, lang_wanted):
    st.title("Sights article generation")
    st.subheader("Generate points of interest and/or expand existing articles")
    st.markdown("<h4>Instructions:</h4>", unsafe_allow_html=True)
@@ -51,36 +51,37 @@ def sights_gen(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wante
 
    ###Input Felder
    st.divider()
-   st.markdown("<h4>Provide informations:</h4>", unsafe_allow_html=True)
+   with st.form(key = "sights generation input fields form"):
+    st.markdown("<h4>Provide informations:</h4>", unsafe_allow_html=True)
 
-   col1_sights_top_info, col2_sights_top_info = st.columns(2)
-   with col1_sights_top_info:
-    destination_wanted = st.text_input("Which destination needs additional sights?")
-    sights_not_needed = st.text_area("Which sights are currently mentioned? _Note: 1 sight = 1 line_")
-    sights_not_needed = [sights_not_needed.strip() for sights_not_needed in sights_not_needed.split("\n")]
-    number_of_sights_wanted = st.number_input("Number of additional sights required", min_value=1, max_value=25, value=5, placeholder="Enter number of additional sights...", key = "main number of sights wanted input")    
-    content_length_wanted = st.slider("Approximate number of words per sight", 200, 1500, 500, key = "main slider content length per sight")
-    
-    
-   with col2_sights_top_info:
-    st.markdown("**Get current data for ticket prizes and opening hours from google:**")
-    if lang_wanted == "Deutsch":
-       country_wanted = st.selectbox("Choose country for google results", ["Deutschland", "Österreich", "Schweiz"], key = "selectbox country input")
-    else:
-       country_wanted = ""
-    number_of_search_results_wanted = st.number_input("How many top search results should be crawled for opening times & ticket prices?", min_value=1, max_value=5, value=3, placeholder="Enter number of crawling results...", key = "number of sights wanted for upgrading")
+    col1_sights_top_info, col2_sights_top_info = st.columns(2)
+    with col1_sights_top_info:
+        destination_wanted = st.text_input("Which destination needs additional sights?")
+        sights_not_needed = st.text_area("Which sights are currently mentioned? _Note: 1 sight = 1 line_")
+        sights_not_needed = [sights_not_needed.strip() for sights_not_needed in sights_not_needed.split("\n")]
+        number_of_sights_wanted = st.number_input("Number of additional sights required", min_value=1, max_value=25, value=5, placeholder="Enter number of additional sights...", key = "main number of sights wanted input")    
+        content_length_wanted = st.slider("Approximate number of words per sight", 200, 1500, 500, key = "main slider content length per sight")
+        
+        
+    with col2_sights_top_info:
+        st.markdown("**Get current data for ticket prizes and opening hours from google:**")
+        if lang_wanted == "Deutsch":
+            country_wanted = st.selectbox("Choose country for google results", ["Deutschland", "Österreich", "Schweiz"], key = "selectbox country input")
+        else:
+            country_wanted = ""
+            number_of_search_results_wanted = st.number_input("How many top search results should be crawled for opening times & ticket prices?", min_value=1, max_value=5, value=3, placeholder="Enter number of crawling results...", key = "number of sights wanted for upgrading")
 
+    form_submit_sights_input_values = st.form_submit_button(label="Generate content")
 
    
    ### hier started der API Call
 
-   st.divider()
-   if st.button("Generate sights :rocket:"):    
+   if form_submit_sights_input_values:    
     ###GPT Prompts
     act_as_prompt_sights, structure_prompt_sights = gptprompts.sight_prompts(number_of_sights_wanted, destination_wanted, sights_not_needed, lang_wanted)
 
     ### API Call
-    top_sights, top_sights_cost, top_sights_gtpversion = gptapi.openAI_content(act_as_prompt_sights, structure_prompt_sights, gpt_temp_wanted, gpt_top_p_wanted, gpt_version_wanted)
+    top_sights, top_sights_cost, top_sights_gtpversion = gptapi.openAI_content(act_as_prompt_sights, structure_prompt_sights, gpt_temp_wanted, gpt_version_wanted)
     try:
         input_list_for_update = json.loads(top_sights)
     
@@ -112,9 +113,9 @@ def sights_gen(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wante
        content_prompt_new_sight, content_pic_prompt = gptprompts.new_sight_prompt(content_length_wanted, new_sight, destination_wanted, lang_wanted)
    
        ### generate content
-       new_sight_content, new_sight_content_cost, new_sight_content_gptversion = gptapi.openAI_content(act_as_prompt_sights, content_prompt_new_sight, gpt_temp_wanted, gpt_top_p_wanted, gpt_version_wanted)
+       new_sight_content, new_sight_content_cost, new_sight_content_gptversion = gptapi.openAI_content(act_as_prompt_sights, content_prompt_new_sight, gpt_temp_wanted, gpt_version_wanted)
        sight_content_cost.append(new_sight_content_cost)
-       new_sight_pic_content, new_sight_pic_content_cost, new_sight_pic_content_gptversion = gptapi.openAI_content(act_as_prompt_sights, content_pic_prompt, gpt_temp_wanted, gpt_top_p_wanted, gpt_version_wanted)
+       new_sight_pic_content, new_sight_pic_content_cost, new_sight_pic_content_gptversion = gptapi.openAI_content(act_as_prompt_sights, content_pic_prompt, gpt_temp_wanted, gpt_version_wanted)
        sight_content_cost.append(new_sight_pic_content_cost)
 
        

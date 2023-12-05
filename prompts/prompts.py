@@ -24,6 +24,16 @@ def meta_description_prompt(template, number_of_elements_for_listicle, focus_des
         content_prompt = f"Antworte auf {lang_wanted}. Verfasse eine Google Meta Description nach dem vorgegebenem Schema. Die Description soll den User am Anfang mit seinem Bedürfnis abholen, dass er hat wenn er nach '{urlaubsart_input} {focus_destination}' sucht. Nutze anschließend ein ➡️ Emoji und erwähne ein paar Besonderheiten, die einen Urlaub in {focus_destination} so außergewöhnlich machen. Anschließend einen Call to Action, der zum Buchen verleiten soll."
     return act_as_prompt, content_prompt
 
+def h1_prompt(template, number_of_elements_for_listicle, focus_destination, jahreszahl, aktueller_monat, special_info_template, urlaubsart_input, lang_wanted):
+    act_as_prompt = f"Antworte auf {lang_wanted}. Du bist SEO Spezialist für ein Reiseunternehmen. Verfasse eine H1 Headline / Hauptüberschrift. Das Fokus Keyword {urlaubsart_input} {focus_destination} steht am Anfang. Ergänze wenn vorhanden: {aktueller_monat} {jahreszahl}. "
+    if template == "Inspirational: Top-10-Article":
+        content_prompt = f"Antworte auf {lang_wanted}. Schreibe Top-{number_of_elements_for_listicle} {urlaubsart_input} {focus_destination} zu Beginn."
+    elif template == "Transactional: Deals":
+        content_prompt = f"Antworte auf {lang_wanted}. Verfasse eine SEO H1 Überschrift - kommuniziere auf jeden Fall auch {special_info_template}. "
+    elif template == "Transactional: Destination":
+        content_prompt = f"Antworte auf {lang_wanted}. Verfasse eine SEO H1 Überschrift. Halte dich exakt an das vorgegebene Muster. Fokus auf die vorgegebenen Inhalte: {urlaubsart_input} {focus_destination} {aktueller_monat} {jahreszahl}"
+    return act_as_prompt, content_prompt   
+
 ## Sehenswürdigkeiten Prompts
 # Mit nachfolgendem Prompt werden neue Sehenswürdigkeiten genannt, welche bis dato noch nicht im Artikel behandelt werden
 def sight_prompts(number_of_sights_wanted, destination_wanted, sights_not_needed, lang_wanted):
@@ -60,11 +70,11 @@ def headline_structure_prompt(lang_wanted, nr_of_headlines_wanted, goal_choice, 
 
     act_as_prompt = f"Du bist SEO Spezialist für ein Reiseunternehmen. Du schreibst lange Artikel, die das gewünschte Thema ganzheitlich abdecken. Du beziehst verschiedene Aspekte mit ein. Du bist mit den Lesern Per Du, sprichst sie im Plural an (ihr/euch)."
     if page_type == "Inspirational":
-        content_prompt = f"Antworte auf {lang_wanted}. Ich brauche {nr_of_headlines_wanted} Überschriften für einen ganzheitlichen Artikel zu {target_topic}. Überlege dir dabei ganz genau, welche Themen ein Artikel zu diesem Thema benötigt. Zielgruppe des Artikels ist: {target_audience}. Der Artikel dient der Inspiration und soll Vorfreude entwickeln. Ziel der Seite: {goal_choice}. Schreibe jede Headline als List-Item einer Python List und antworte ausschließlich mit der Python Liste."
+        content_prompt = f"Antworte auf {lang_wanted}. Antworte ausschließlich mit einer Python-Liste. Sonst nichts. Ich brauche {nr_of_headlines_wanted} Überschriften für einen ganzheitlichen Artikel zu {target_topic}. Überlege dir dabei ganz genau, welche Themen ein Artikel zu diesem Thema benötigt. Zielgruppe des Artikels ist: {target_audience}. Der Artikel dient der Inspiration und soll Vorfreude entwickeln. Ziel der Seite: {goal_choice}. Schreibe jede Headline als List-Item einer Python List und antworte ausschließlich mit der Python Liste."
     elif page_type == "Informational":
-        content_prompt = f"Antworte auf {lang_wanted}. Ich brauche {nr_of_headlines_wanted} Überschriften für einen ganzheitlichen Artikel zu {target_topic}. Überlege dir dabei ganz genau, welche Themen ein Artikel zu diesem Thema benötigt. Zielgruppe des Artikels ist: {target_audience}. Der Artikel dient der Information und soll faktisch korrekt sein. Ziel der Seite: {goal_choice}. Schreibe jede Headline als List-Item einer Python List und antworte ausschließlich mit der Python Liste."
+        content_prompt = f"Antworte auf {lang_wanted}. Antworte ausschließlich mit einer Python-Liste. Sonst nichts. Ich brauche {nr_of_headlines_wanted} Überschriften für einen ganzheitlichen Artikel zu {target_topic}. Überlege dir dabei ganz genau, welche Themen ein Artikel zu diesem Thema benötigt. Zielgruppe des Artikels ist: {target_audience}. Der Artikel dient der Information und soll faktisch korrekt sein. Ziel der Seite: {goal_choice}. Schreibe jede Headline als List-Item einer Python List und antworte ausschließlich mit der Python Liste."
     elif page_type == "Transactional":
-        content_prompt = f"Antworte auf {lang_wanted}. Ich brauche {nr_of_headlines_wanted} Überschriften für einen ganzheitlichen Artikel zu {target_topic}. Zielgruppe des Artikels ist: {target_audience}. Der Artikel dient dem Verkauf von Reisen und soll folgende Aspekte beinhalten: {target_topic} nach Reisedauer (je nachdem was für diese {target_topic} von Deutschland aus Sinn ergibt), für verschiedene Reisegruppen (Paare, Familien, Singles), Reisetypen (Adventurer, Sightseeing, Erholung,...). Außerdem Top Unterkünfte sollen dabei sein. Ziel der Seite: {goal_choice}. Schreibe jede Headline als List-Item einer Python List und antworte ausschließlich mit der Python Liste."
+        content_prompt = f"Antworte auf {lang_wanted}. Antworte ausschließlich mit einer Python-Liste. Sonst nichts. Ich brauche {nr_of_headlines_wanted} Überschriften für einen ganzheitlichen Artikel zu {target_topic}. Zielgruppe des Artikels ist: {target_audience}. Der Artikel dient dem Verkauf von Reisen und soll folgende Aspekte beinhalten: {target_topic} nach Reisedauer (je nachdem was für diese {target_topic} von Deutschland aus Sinn ergibt), für verschiedene Reisegruppen (Paare, Familien, Singles), Reisetypen (Adventurer, Sightseeing, Erholung,...). Außerdem Top Unterkünfte sollen dabei sein. Ziel der Seite: {goal_choice}. Schreibe jede Headline als List-Item einer Python List und antworte ausschließlich mit der Python Liste."
     return act_as_prompt, content_prompt
 
 def content_for_headline_prompt(lang_wanted, headline, length_wanted, additional_informations):
@@ -94,6 +104,11 @@ def new_beach_prompt(content_length_wanted_beaches, beach, destination_wanted_fo
 def alt_tag_prompts(lang_wanted, image_url, image_context):
     content_prompt_alt_text = f"Verfasse einen Alt Text für das Bild {image_url} in einem (1) Satz auf {lang_wanted}. {image_context} sollte vorkommen. Stelle dir vor, du möchtest einer sehbeeinträchgiten Person erklären, was auf dem Bild zu sehen ist im Kontext von {image_context}. Welche Elemente siehst du? Wo sind sie platziert? Welche Emotionen werden dabei geweckt? Schreibe nicht 'das Bild zeigt...' sondern beschreibe es direkt."
     return content_prompt_alt_text
+
+def caption_prompts(lang_wanted, image_url):
+    caption_prompt_text = f"Verfasse einen Caption Text für das Bild {image_url} mit bis zu 10 Wörtern in der Sprache {lang_wanted}. Die Caption ist direkt unter dem Bild und soll während dem Betrachten des Bildes zusätzlichen Kontext bieten."
+    return caption_prompt_text
+
 
 
 #### prompts for product data

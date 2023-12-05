@@ -24,7 +24,7 @@ def dict_to_html_list(data):
     return html
 
 
-def beach_gen(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wanted):
+def beach_gen(gpt_version_wanted, gpt_temp_wanted, lang_wanted):
    st.title("Beach article generation")
    st.subheader("Generate an inspirational article about the top beaches")
    st.markdown("<h4>Instructions:</h4>", unsafe_allow_html=True)
@@ -45,29 +45,30 @@ def beach_gen(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wanted
    df_html_new_beaches = pd.DataFrame(columns=columns_for_new_beaches_df)
 
    ###Input Felder
-   st.divider()
-   st.markdown("<h4>Provide informations:</h4>", unsafe_allow_html=True)
+   with st.form(key = "beach generation input fields"):
+    st.markdown("<h4>Provide informations:</h4>", unsafe_allow_html=True)
 
-   col1_sights_top_info, col2_sights_top_info = st.columns(2)
-   with col1_sights_top_info:
-    number_of_beaches_wanted = st.number_input("Number of beaches required", min_value=1, max_value=25, value=5, placeholder="Enter number of beaches...", key = "main number of beaches wanted input")    
-    content_length_wanted_beaches = st.slider("Approximate number of words per beach", 200, 1500, 500, key = "main slider content length per beach")
+    col1_sights_top_info, col2_sights_top_info = st.columns(2)
+    with col1_sights_top_info:
+        number_of_beaches_wanted = st.number_input("Number of beaches required", min_value=1, max_value=25, value=5, placeholder="Enter number of beaches...", key = "main number of beaches wanted input")    
+        content_length_wanted_beaches = st.slider("Approximate number of words per beach", 200, 1500, 500, key = "main slider content length per beach")
 
-    
-   with col2_sights_top_info:
-    destination_wanted_for_beach = st.text_input("Insert destination of beaches")
-    beaches_not_needed = st.text_area("In case of update: Which beaches are currently mentioned? _Note: 1 sight = 1 line_")
-    beaches_not_needed = [beaches_not_needed.strip() for beaches_not_needed in beaches_not_needed.split("\n")]
+        
+    with col2_sights_top_info:
+        destination_wanted_for_beach = st.text_input("Insert destination of beaches")
+        beaches_not_needed = st.text_area("In case of update: Which beaches are currently mentioned? _Note: 1 sight = 1 line_")
+        beaches_not_needed = [beaches_not_needed.strip() for beaches_not_needed in beaches_not_needed.split("\n")]
+    form_submit_beaches_input_values = st.form_submit_button(label="Generate content")
    
    ### hier started der API Call
 
    st.divider()
-   if st.button("Generate beaches :rocket:"):    
+   if form_submit_beaches_input_values:    
     ###GPT Prompts
     act_as_prompt_beach, structure_prompt_beach = gptprompts.beach_prompts(number_of_beaches_wanted, destination_wanted_for_beach, beaches_not_needed, lang_wanted)
 
     ### API Call
-    top_beaches, top_beachess_cost, top_beaches_gtpversion = gptapi.openAI_content(act_as_prompt_beach, structure_prompt_beach, gpt_temp_wanted, gpt_top_p_wanted, gpt_version_wanted)
+    top_beaches, top_beachess_cost, top_beaches_gtpversion = gptapi.openAI_content(act_as_prompt_beach, structure_prompt_beach, gpt_temp_wanted, gpt_version_wanted)
     try:
         input_list_for_beaches = json.loads(top_beaches)
     
@@ -93,7 +94,7 @@ def beach_gen(gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wanted
        content_prompt_new_sight = gptprompts.new_beach_prompt(content_length_wanted_beaches, beach, destination_wanted_for_beach, lang_wanted)
    
        ### generate content
-       new_beach_content, new_beach_content_cost, new_beach_content_gptversion = gptapi.openAI_content(act_as_prompt_beach, content_prompt_new_sight, gpt_temp_wanted, gpt_top_p_wanted, gpt_version_wanted)
+       new_beach_content, new_beach_content_cost, new_beach_content_gptversion = gptapi.openAI_content(act_as_prompt_beach, content_prompt_new_sight, gpt_temp_wanted, gpt_version_wanted)
        beach_content_cost.append(new_beach_content_cost)
 
 

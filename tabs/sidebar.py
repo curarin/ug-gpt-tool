@@ -25,11 +25,10 @@ def sidebar():
     elif gpt_version_wanted == "GPT-3.5":
         gpt_version_wanted = "gpt-3.5-turbo-1106"
         
-    gpt_temp_wanted = st.slider("Temperatur - Standard: 0.7", 0.09, 1.0, 0.7, key = "sidebar slider gtp temp")
-    gpt_top_p_wanted = st.slider("Top_p - Standard: 0.8", 0.09, 1.0, 0.8, key = "sidebar slider gtp top p")
+    gpt_temp_wanted = st.slider("Temperatur - Standard: 0.5", 0.09, 1.0, 0.5, key = "sidebar slider gtp temp")
 
     st.divider()
     st.markdown("<h3>Kontakt</h3><p>If you have any questions, requests or comments, please contact the Inbound Marketing Team:</p><ul><li><a href='https://teams.microsoft.com/l/channel/19%3a72197b1f3177425aba225726ec4f2f5f%40thread.skype/Inbound%2520Automation?groupId=1da7e5cc-703e-4d39-8dac-4b5a723173a4&tenantId=5f4d3a64-cc9f-49a2-be2d-41ac01dba2dd'>Inbound Marketing Automation Teams Channel</a></li><li><a href='mailto:paul.herzog@urlaubsguru.de'>E-Mail</a></li>", unsafe_allow_html=True)
     st.divider()
 
-    return gpt_version_wanted, gpt_temp_wanted, gpt_top_p_wanted, lang_wanted
+    return gpt_version_wanted, gpt_temp_wanted, lang_wanted
