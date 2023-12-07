@@ -1,13 +1,5 @@
 import streamlit as st
 import openai
-import pandas as pd
-from bs4 import BeautifulSoup
-from requests.exceptions import RequestException
-import json
-import io
-from bs4 import BeautifulSoup
-import requests
-import string
 from openai import OpenAI
 
 ###GPT API KEY

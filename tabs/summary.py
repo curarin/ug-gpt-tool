@@ -1,11 +1,5 @@
 #modules
 import streamlit as st
-from datetime import datetime
-import json
-import pandas as pd
-import re
-from bs4 import BeautifulSoup
-import requests
 
 
 #functions from other files

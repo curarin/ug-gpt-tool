@@ -1,12 +1,6 @@
 import streamlit as st
-import openai
-import json
-import pandas as pd
-import io
 from bs4 import BeautifulSoup
 import requests
-import string
-from requests.exceptions import RequestException
 import functions.gptapi as gptapi
 import prompts.prompts as gptprompts
 

@@ -43,6 +43,7 @@ def generate_alt_text(gpt_version_wanted, gpt_temp_wanted, lang_wanted):
             soup = BeautifulSoup(r.text, 'html.parser')
             figure_tags = soup.find_all('figure')
             href_urls = []
+            ### find figure tag urls
             for figure_tag in figure_tags:
                 a_tag = figure_tag.find('a')
                 if a_tag and 'href' in a_tag.attrs:
@@ -50,6 +51,12 @@ def generate_alt_text(gpt_version_wanted, gpt_temp_wanted, lang_wanted):
                     href_urls.append(href_url)
                 else:
                     st.warning("No images found.")
+            # Find the image tag
+            img_tag = soup.find_all('img')
+            for img in img_tag:
+                img_src = img['src']
+                if "urlaubsguru" in img_src and not img_src.endswith('.png'):
+                    href_urls.append(img_src)
 
             # Print the extracted href URLs
             alt_text_generated_cost_list = []

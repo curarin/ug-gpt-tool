@@ -1,6 +1,4 @@
 import streamlit as st
-from bs4 import BeautifulSoup
-import requests
 
 #functions from other files
 import functions.gptapi as gptapi

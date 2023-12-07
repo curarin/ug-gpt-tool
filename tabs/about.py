@@ -1,7 +1,6 @@
 import streamlit as st
 import prompts.prompts as gptprompts
 import functions.bigquery as bq
-import functions.gptapi as gptapi
 
 
 
