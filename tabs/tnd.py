@@ -41,7 +41,7 @@ def tnd(gpt_version_wanted, gpt_temp_wanted, lang_wanted):
 
     ### hier folgen die Input Felder
     st.markdown("### Provide information")
-    tnd_template_choice = st.selectbox("Choose template", ["Transactional: Destination", "Transactional: Deals", "Inspirational: Top-10-Article"])
+    tnd_template_choice = st.selectbox("Choose template", ["Transactional: Destination", "Inspirational: Sights-Article"])
 
     col1_overview, col2_overview = st.columns(2)
     with col1_overview:
@@ -64,17 +64,14 @@ def tnd(gpt_version_wanted, gpt_temp_wanted, lang_wanted):
         col1_generic_info, col2_generic_info = st.columns(2)
         with col1_generic_info:
             focus_keyword_input = st.text_input("Destination:", key = "generic_input_fokus_kw")
-            if tnd_template_choice == "Transactional: Deals" or tnd_template_choice == "Transactional: Destination":
+            if tnd_template_choice == "Transactional: Destination":
                 urlaubsart_input = st.text_input("Enter type of holiday: (holiday, wellness weekend, weekend trip, all-inclusive, last minute,...)", key = "urlaubsart_input")
-            elif tnd_template_choice == "Inspirational: Top-10-Article":
+            elif tnd_template_choice == "Inspirational: Sights-Article":
                 urlaubsart_input = st.text_input("Enter top 10 article type: (sights, restaurants, activities,...)", key = "sights_urlaubsart_input")
-            if tnd_template_choice == "Inspirational: Top-10-Article":
                 number_of_elements_for_listicle = st.slider("Number of elements in the top X article", 6, 30, key = "generic_listicle_number_of_elements_input")
                 special_info_template = st.text_area("Which top sights/activities/... are the most important? Name 3:", key = "generic_listicle_must_have_input")
                 special_info_template = [special_info_template.strip() for special_info_template in special_info_template.split("\n")]
-            elif tnd_template_choice == "Transactional: Deals":
-                special_info_template = st.text_input("What specific product information characterizes this offer?", key = "generic_angebote_special_info_input")
-
+            
         with col2_generic_info:
             if any([selected_year_number_title, selected_month_number_title, selected_emoji_title, selected_year_number_descr, selected_month_number_descr, selected_emoji_descr]):
                 st.markdown("**Input for additional informations:**", unsafe_allow_html=True)
@@ -102,6 +99,18 @@ def tnd(gpt_version_wanted, gpt_temp_wanted, lang_wanted):
                     selected_emoji_descr = st.selectbox("Descr. Tag: Choose emoji", ["❤️", "🔥", "🌎", "✨", "🚀", "✅", "🥰", "🫶", "🎉", "👌", "🌴", "☀️", "✈️", "🏨", "➡️", "⬇️", "⬅", "⬆️"], key = "emoji_input_list_descr")
                 else:
                     selected_emoji_descr = ""
+        
+        #logic to determine which finetuned gpt models are used
+        if tnd_template_choice == "Transactional: Destination":
+            gpt_version_wanted_title = "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8Uat3tmq"
+            gpt_version_wanted_descr = "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8UayOp16"
+            gpt_version_wanted_h1 = "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8UbLqj0V"
+        elif tnd_template_choice == "Inspirational: Sights-Article":
+            gpt_version_wanted_title = gpt_version_wanted
+            gpt_version_wanted_descr = gpt_version_wanted
+            gpt_version_wanted_h1 = gpt_version_wanted
+        
+        ####
         form_submit_tnd_input_values = st.form_submit_button(label="Generate content")
 
     if form_submit_tnd_input_values:
@@ -110,7 +119,8 @@ def tnd(gpt_version_wanted, gpt_temp_wanted, lang_wanted):
         act_as_prompt_descr, content_prompt_descr = gptprompts.meta_description_prompt(tnd_template_choice, number_of_elements_for_listicle, focus_keyword_input, selected_year_number_descr, selected_month_number_descr, selected_emoji_descr, special_info_template, urlaubsart_input, lang_wanted)
         act_as_prompt_h1, content_prompt_h1 = gptprompts.h1_prompt(tnd_template_choice, number_of_elements_for_listicle, focus_keyword_input, selected_year_number_descr, selected_month_number_descr, special_info_template, urlaubsart_input, lang_wanted)
         #generate title tag
-        title_tag_generated, title_tag_generated_cost, title_tag_generated_gptversion = gptapi.openAI_content(act_as_prompt_title, content_prompt_title, gpt_temp_wanted, gpt_version_wanted)
+        title_tag_generated, title_tag_generated_cost, title_tag_generated_gptversion = gptapi.openAI_content(act_as_prompt_title, content_prompt_title, gpt_temp_wanted, gpt_version_wanted_title)
+
         title_tag_generated_length = len(title_tag_generated)
         if 40 < title_tag_generated_length < 50:
             title_tag_length_ok = "⚠️ - A bit too short. One could manually add another word here."
@@ -122,7 +132,9 @@ def tnd(gpt_version_wanted, gpt_temp_wanted, lang_wanted):
             title_tag_length_ok = "❌ - too long/short. Please clear the cache (press 'C') and regenerate."
         
         #generate meta description
-        descr_tag_generated, descr_tag_generated_cost, descr_tag_generated_gptversion = gptapi.openAI_content(act_as_prompt_descr, content_prompt_descr, gpt_temp_wanted, gpt_version_wanted)
+        #descr_tag_generated, descr_tag_generated_cost, descr_tag_generated_gptversion = gptapi.openAI_content(act_as_prompt_descr, content_prompt_descr, gpt_temp_wanted, gpt_version_wanted)
+        descr_tag_generated, descr_tag_generated_cost, descr_tag_generated_gptversion = gptapi.openAI_content("Du bist SEO in einem Reisemagazin. Du schreibst SEO Meta Description Tags mit maximal 160 Zeichen. Verwende Emotionen.", f"Antworte auf {lang_wanted}. Verfasse eine Google Meta Description für '{urlaubsart_input} {focus_keyword_input}'. Nutze auch {selected_emoji_title} {selected_month_number_title} {selected_year_number_title}.", gpt_temp_wanted, gpt_version_wanted_descr)
+
         descr_tag_generated_length = len(descr_tag_generated)
         if 130 < descr_tag_generated_length < 150:
             descr_tag_length_ok = "⚠️ - A bit too short. One could manually add another word here."
@@ -134,7 +146,8 @@ def tnd(gpt_version_wanted, gpt_temp_wanted, lang_wanted):
             descr_tag_length_ok = "❌ - too long/short. Please clear the cache (press 'C') and regenerate."
 
         #generate h1 heading
-        h1_tag_generated, h1_tag_generated_cost, h1_tag_generated_gptversion = gptapi.openAI_content(act_as_prompt_h1, content_prompt_h1, gpt_temp_wanted, gpt_version_wanted)
+        #h1_tag_generated, h1_tag_generated_cost, h1_tag_generated_gptversion = gptapi.openAI_content(act_as_prompt_h1, content_prompt_h1, gpt_temp_wanted, gpt_version_wanted)
+        h1_tag_generated, h1_tag_generated_cost, h1_tag_generated_gptversion = gptapi.openAI_content("Du bist SEO in einem Reisemagazin. Du schreibst eine H1 Headline für SEO.", f"Antworte auf {lang_wanted}. Verfasse eine H1 Headline für '{urlaubsart_input} {focus_keyword_input}'. Nutze auch {selected_month_number_title} {selected_year_number_title}.", gpt_temp_wanted, gpt_version_wanted_h1)
 
         st.divider()
         st.subheader("Results")

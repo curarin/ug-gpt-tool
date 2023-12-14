@@ -34,6 +34,9 @@ def openAI_content(system_act_as, user_prompt, temp_wanted, gpt_version):
     elif gpt_version == "gpt-3.5-turbo-1106":
         cost_per_token_input = 0.001
         cost_per_token_output = 0.002
+    elif gpt_version.startswith("ft:"):
+        cost_per_token_input = 0.0030
+        cost_per_token_output = 0.0060
         
     cost_prompt = prompt_tokens * (cost_per_token_input/1000)
     cost_completion = completion_tokens * (cost_per_token_output/1000)

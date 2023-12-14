@@ -5,13 +5,13 @@
 # Das Template "Deals" soll dabei die Redakteur:innen anleiten einen Longtail zu formen, indem spezifische Informationen noch angegeben werden
 
 def title_tag_prompt(template, number_of_elements_for_listicle, focus_destination, jahreszahl, aktueller_monat, emoji, special_info_template, urlaubsart_input, lang_wanted):
-    act_as_prompt = f"Antworte auf {lang_wanted}. Du bist SEO Spezialist für ein Reiseunternehmen. Verfasse einen Google Title Tag mit maximal 60 Zeichen. Halte dich exakt an diese Längenvorgabe. Das Fokus Keyword ({urlaubsart_input} {focus_destination}) steht am Anfang. Inkludiere folgende Informationen: {jahreszahl}, {aktueller_monat} {emoji}. Du bist mit den Leserinnen Per Du. Wir sprechen von uns als 'Wir'."
+    act_as_prompt = f"Du bist SEO in einem Reisemagazin. Du schreibst SEO Title Tags mit maximal 65 Zeichen."
     if template == "Inspirational: Top-10-Article":    
         content_prompt = f"Antworte auf {lang_wanted}. Verfasse nach dem vorgegebenen Schema einen Title Tag. Der Title muss mit 'Top {number_of_elements_for_listicle} {urlaubsart_input} {focus_destination}' beginnen. Benutze am Ende einen emotionalen Trigger um Klickattraktivität zu erhöhen."
     elif template == "Transactional: Deals":
         content_prompt = f"Antworte auf {lang_wanted}. Verfasse einen Title Tag nach dem vorgegebenem Schema, der besonderes Augenmerk auf die Besonderheit {special_info_template} legt. Das muss vorhanden sein. Am Anfang soll außerdem stehen: {urlaubsart_input} {focus_destination}."
     elif template == "Transactional: Destination":
-        content_prompt = f"Antworte auf {lang_wanted}. Verfasse einen Title Tag nach dem vorgegebenem Schema. Am Anfang soll stehen: {urlaubsart_input} {focus_destination}. Nutze anschließend einen Emotionalen Trigger, der die Reiselust für {focus_destination} wecken soll."
+        content_prompt = f"Antworte auf {lang_wanted}. Erstelle einen SEO Title Tag für {urlaubsart_input} {focus_destination}. Nutze auch {emoji} {aktueller_monat} {jahreszahl}"
     return act_as_prompt, content_prompt
 
 def meta_description_prompt(template, number_of_elements_for_listicle, focus_destination, jahreszahl, aktueller_monat, emoji, special_info_template, urlaubsart_input, lang_wanted):
