@@ -11,7 +11,7 @@ def title_tag_prompt(template, number_of_elements_for_listicle, focus_destinatio
     elif template == "Transactional: Deals":
         content_prompt = f"Antworte auf {lang_wanted}. Verfasse einen Title Tag nach dem vorgegebenem Schema, der besonderes Augenmerk auf die Besonderheit {special_info_template} legt. Das muss vorhanden sein. Am Anfang soll außerdem stehen: {urlaubsart_input} {focus_destination}."
     elif template == "Transactional: Destination":
-        content_prompt = f"Antworte auf {lang_wanted}. Erstelle einen SEO Title Tag für {urlaubsart_input} {focus_destination}. Nutze auch {emoji} {aktueller_monat} {jahreszahl}"
+        content_prompt = f"Antworte auf {lang_wanted}. Erstelle einen SEO Title Tag für {urlaubsart_input} {focus_destination}. Falls vorhanden ergänze: {emoji} {aktueller_monat} {jahreszahl}"
     return act_as_prompt, content_prompt
 
 def meta_description_prompt(template, number_of_elements_for_listicle, focus_destination, jahreszahl, aktueller_monat, emoji, special_info_template, urlaubsart_input, lang_wanted):
@@ -21,7 +21,7 @@ def meta_description_prompt(template, number_of_elements_for_listicle, focus_des
     elif template == "Transactional: Deals":
         content_prompt = f"Antworte auf {lang_wanted}. Verfasse eine Google Meta Description nach dem vorgegebenem Schema. Die Description soll den User am Anfang mit seinem Bedürfnis abholen, dass er hat wenn er nach '{urlaubsart_input} {focus_destination}' sucht, danach kommunizierst du {special_info_template}. Achte auf Emotionalität. Die Google Meta Description soll die Vorfreude auf das Angebot wecken und zum kaufen verleiten. Am Ende soll ein Call to Action folgen, der Buchungsinteresse wecken soll."
     elif template == "Transactional: Destination":
-        content_prompt = f"Antworte auf {lang_wanted}. Verfasse eine Google Meta Description nach dem vorgegebenem Schema. Die Description soll den User am Anfang mit seinem Bedürfnis abholen, dass er hat wenn er nach '{urlaubsart_input} {focus_destination}' sucht. Nutze anschließend ein ➡️ Emoji und erwähne ein paar Besonderheiten, die einen Urlaub in {focus_destination} so außergewöhnlich machen. Anschließend einen Call to Action, der zum Buchen verleiten soll."
+        content_prompt = f"Antworte auf {lang_wanted}. Erstelle eine Meta Description für {urlaubsart_input} {focus_destination}. Falls vorhanden ergänze: {emoji} {aktueller_monat} {jahreszahl} "
     return act_as_prompt, content_prompt
 
 def h1_prompt(template, number_of_elements_for_listicle, focus_destination, jahreszahl, aktueller_monat, special_info_template, urlaubsart_input, lang_wanted):
@@ -31,7 +31,7 @@ def h1_prompt(template, number_of_elements_for_listicle, focus_destination, jahr
     elif template == "Transactional: Deals":
         content_prompt = f"Antworte auf {lang_wanted}. Verfasse eine SEO H1 Überschrift - kommuniziere auf jeden Fall auch {special_info_template}. "
     elif template == "Transactional: Destination":
-        content_prompt = f"Antworte auf {lang_wanted}. Verfasse eine SEO H1 Überschrift. Halte dich exakt an das vorgegebene Muster. Fokus auf die vorgegebenen Inhalte: {urlaubsart_input} {focus_destination} {aktueller_monat} {jahreszahl}"
+        content_prompt = f"Antworte auf {lang_wanted}. Erstelle eine H1 Überschrift für {urlaubsart_input} {focus_destination}. Falls vorhanden ergänze: {aktueller_monat} {jahreszahl}"
     return act_as_prompt, content_prompt   
 
 ## Sehenswürdigkeiten Prompts

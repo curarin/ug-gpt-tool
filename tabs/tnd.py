@@ -132,8 +132,7 @@ def tnd(gpt_version_wanted, gpt_temp_wanted, lang_wanted):
             title_tag_length_ok = "❌ - too long/short. Please clear the cache (press 'C') and regenerate."
         
         #generate meta description
-        #descr_tag_generated, descr_tag_generated_cost, descr_tag_generated_gptversion = gptapi.openAI_content(act_as_prompt_descr, content_prompt_descr, gpt_temp_wanted, gpt_version_wanted)
-        descr_tag_generated, descr_tag_generated_cost, descr_tag_generated_gptversion = gptapi.openAI_content("Du bist SEO in einem Reisemagazin. Du schreibst SEO Meta Description Tags mit maximal 160 Zeichen. Verwende Emotionen.", f"Antworte auf {lang_wanted}. Verfasse eine Google Meta Description für '{urlaubsart_input} {focus_keyword_input}'. Nutze auch {selected_emoji_title} {selected_month_number_title} {selected_year_number_title}.", gpt_temp_wanted, gpt_version_wanted_descr)
+        descr_tag_generated, descr_tag_generated_cost, descr_tag_generated_gptversion = gptapi.openAI_content(act_as_prompt_descr, content_prompt_descr, gpt_temp_wanted, gpt_version_wanted_descr)
 
         descr_tag_generated_length = len(descr_tag_generated)
         if 130 < descr_tag_generated_length < 150:
@@ -146,8 +145,7 @@ def tnd(gpt_version_wanted, gpt_temp_wanted, lang_wanted):
             descr_tag_length_ok = "❌ - too long/short. Please clear the cache (press 'C') and regenerate."
 
         #generate h1 heading
-        #h1_tag_generated, h1_tag_generated_cost, h1_tag_generated_gptversion = gptapi.openAI_content(act_as_prompt_h1, content_prompt_h1, gpt_temp_wanted, gpt_version_wanted)
-        h1_tag_generated, h1_tag_generated_cost, h1_tag_generated_gptversion = gptapi.openAI_content("Du bist SEO in einem Reisemagazin. Du schreibst eine H1 Headline für SEO.", f"Antworte auf {lang_wanted}. Verfasse eine H1 Headline für '{urlaubsart_input} {focus_keyword_input}'. Nutze auch {selected_month_number_title} {selected_year_number_title}.", gpt_temp_wanted, gpt_version_wanted_h1)
+        h1_tag_generated, h1_tag_generated_cost, h1_tag_generated_gptversion = gptapi.openAI_content(act_as_prompt_h1, content_prompt_h1, gpt_temp_wanted, gpt_version_wanted_h1)
 
         st.divider()
         st.subheader("Results")
