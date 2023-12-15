@@ -61,6 +61,7 @@ def sights_gen(gpt_version_wanted, gpt_temp_wanted, lang_wanted):
         st.markdown("**Get current data for ticket prizes and opening hours from google:**")
         if lang_wanted == "Deutsch":
             country_wanted = st.selectbox("Choose country for google results", ["Deutschland", "Österreich", "Schweiz"], key = "selectbox country input")
+            number_of_search_results_wanted = 3
         else:
             country_wanted = ""
             number_of_search_results_wanted = st.number_input("How many top search results should be crawled for opening times & ticket prices?", min_value=1, max_value=5, value=3, placeholder="Enter number of crawling results...", key = "number of sights wanted for upgrading")
@@ -75,20 +76,16 @@ def sights_gen(gpt_version_wanted, gpt_temp_wanted, lang_wanted):
     act_as_prompt_sights, structure_prompt_sights = gptprompts.sight_prompts(number_of_sights_wanted, destination_wanted, sights_not_needed, lang_wanted)
 
     ### API Call
-    top_sights, top_sights_cost, top_sights_gtpversion = gptapi.openAI_content(act_as_prompt_sights, structure_prompt_sights, gpt_temp_wanted, gpt_version_wanted)
-    try:
-        input_list_for_update = json.loads(top_sights)
-    
-        if isinstance(input_list_for_update, list) and all(isinstance(item, str) for item in input_list_for_update):
-            output_list_for_update = input_list_for_update
-        else:
-            raise ValueError("Invalid JSON list format")
+    #top_sights, top_sights_cost, top_sights_gtpversion = gptapi.openAI_content(act_as_prompt_sights, structure_prompt_sights, gpt_temp_wanted, gpt_version_wanted)
+    top_sights, top_sights_cost = gptapi.openAI_json_response(structure_prompt_sights, lang_wanted)
 
-    except (json.JSONDecodeError, ValueError):
-        input_list_for_update = [item.strip("' ") for item in top_sights.strip("[]").split(",")]
-        output_list_for_update = input_list_for_update
-    
-    sight_list_for_update = output_list_for_update
+    data = json.loads(top_sights)
+    # Get the first key dynamically
+    first_key = list(data.keys())[0]
+
+    # Access the values associated with the first key
+    sight_list_for_update = data[first_key]
+
     st.subheader("These sights are going to be added:")
     for sight_to_be_added in sight_list_for_update:
         st.write(sight_to_be_added)
@@ -107,7 +104,8 @@ def sights_gen(gpt_version_wanted, gpt_temp_wanted, lang_wanted):
        content_prompt_new_sight, content_pic_prompt = gptprompts.new_sight_prompt(content_length_wanted, new_sight, destination_wanted, lang_wanted)
    
        ### generate content
-       new_sight_content, new_sight_content_cost, new_sight_content_gptversion = gptapi.openAI_content(act_as_prompt_sights, content_prompt_new_sight, gpt_temp_wanted, gpt_version_wanted)
+       new_sight_content, new_sight_content_cost, new_sight_content_gptversion = gptapi.openAI_content(act_as_prompt_sights, content_prompt_new_sight, gpt_temp_wanted, "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8W1lM7Mt")
+       #new_sight_content, new_sight_content_cost, new_sight_content_gptversion = gptapi.openAI_content(f"Du bist SEO Spezialist für ein Reiseunternehmen. Verfasse einen Text für die Sehenswürdigkeit {new_sight}", f"Antworte auf {lang_wanted}. Beschreibe die Sehenswürdigkeit {new_sight} in der Urlaubsguru Brand Tonalität.", gpt_temp_wanted, "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8VibNCct")
        sight_content_cost.append(new_sight_content_cost)
        new_sight_pic_content, new_sight_pic_content_cost, new_sight_pic_content_gptversion = gptapi.openAI_content(act_as_prompt_sights, content_pic_prompt, gpt_temp_wanted, gpt_version_wanted)
        sight_content_cost.append(new_sight_pic_content_cost)

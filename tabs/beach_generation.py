@@ -61,20 +61,13 @@ def beach_gen(gpt_version_wanted, gpt_temp_wanted, lang_wanted):
     act_as_prompt_beach, structure_prompt_beach = gptprompts.beach_prompts(number_of_beaches_wanted, destination_wanted_for_beach, beaches_not_needed, lang_wanted)
 
     ### API Call
-    top_beaches, top_beachess_cost, top_beaches_gtpversion = gptapi.openAI_content(act_as_prompt_beach, structure_prompt_beach, gpt_temp_wanted, gpt_version_wanted)
-    try:
-        input_list_for_beaches = json.loads(top_beaches)
+    top_beaches, top_beachess_cost = gptapi.openAI_json_response(structure_prompt_beach, lang_wanted)
+    data = json.loads(top_beaches)
+    # Get the first key dynamically
+    first_key = list(data.keys())[0]
+    # Access the values associated with the first key
+    beaches_list_final = data[first_key]
     
-        if isinstance(input_list_for_beaches, list) and all(isinstance(item, str) for item in input_list_for_beaches):
-            output_list_for_beaches = input_list_for_beaches
-        else:
-            raise ValueError("Invalid JSON list format")
-
-    except (json.JSONDecodeError, ValueError):
-        input_list_for_beaches = [item.strip("' ") for item in top_beaches.strip("[]").split(",")]
-        output_list_for_beaches = input_list_for_beaches
-    
-    beaches_list_final = output_list_for_beaches
     st.subheader("These beaches are going to be added:")
     st.write(beaches_list_final)
     

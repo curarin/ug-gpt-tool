@@ -37,13 +37,13 @@ def h1_prompt(template, number_of_elements_for_listicle, focus_destination, jahr
 ## Sehenswürdigkeiten Prompts
 # Mit nachfolgendem Prompt werden neue Sehenswürdigkeiten genannt, welche bis dato noch nicht im Artikel behandelt werden
 def sight_prompts(number_of_sights_wanted, destination_wanted, sights_not_needed, lang_wanted):
-    act_as_prompt_sights = f"Antworte auf {lang_wanted}. Du bist eine reisebegeisterte und erfahrene Redakteurin mit SEO-Fokus und Reiseexpertin. Die Sätze werden informativ und mit einer sehr attraktiven Bildsprache verfasst. Die Sätze sind nicht zu kompliziert formuliert, gerne werden beschreibende Adjektive genutzt. Die Redakteurin nutzt präzise Beschreibungen und eine enthusiastische Art der Erzählung um dem Leser dabei helfen, sich gut beraten zu fühlen und eine Entscheidung für ein Reiseziel oder für die Buchung eines konkreten Angebots zu treffen."
+    act_as_prompt_sights = f"Du bist SEO Spezialist für ein Reiseunternehmen. Du verfasst einen Sehenswürdigkeiten Artikel in der Urlaubsguru Brand Tonalität."
     structure_prompt_sights = f"Antworte auf {lang_wanted}. Nenne mir exakt {number_of_sights_wanted} Sehenswürdigkeiten, die man in {destination_wanted} abseits von {sights_not_needed} unbedingt gesehen haben? Antworte mit einer Python Liste der Sehenswürdigkeiten. Inkludiere keinerlei Erklärungen."
     return act_as_prompt_sights, structure_prompt_sights
 
 # Mit nachfolgendem Prompt wird der beschreibende Text sowie der Bild-Tipp für jede neue Sehenswürdigkeit generiert
 def new_sight_prompt(content_length_wanted, new_sight, destination_wanted, lang_wanted):
-    content_prompt_new_sight = f"Antworte auf {lang_wanted}. Erzähle etwas über {new_sight}. Was macht sie so besonders? Warum muss man als Tourist dort hin? Was zeichnet diese Sehenswürdigkeit aus im Vergleich zu anderen Sehenswürdigkeiten in {destination_wanted}? Erzähle auch historische Details. Du bist Per Du mit der Leserschaft. Du sprichst die Leserschaft im Plural an. Stelle sicher, dass der Text die Leser dazu ermutigt die Sehenswürdigkeit {new_sight} zu besuchen. Verzichte auf Floskeln."
+    content_prompt_new_sight = f"Antworte auf {lang_wanted}. Beschreibe die Sehenswürdigkeit {new_sight} in {destination_wanted} in der Urlaubsguru Brand Tonalität."
     content_pic_prompt = f"Antworte auf {lang_wanted}. Schreibe maximal 50 Wörter: Was muss auf einem Bild für {new_sight} zu sehen sein, damit die Sehenswürdigkeit gut zur Geltung kommt und die Zielgruppe diese gerne besuchen möchte?"
     return content_prompt_new_sight, content_pic_prompt
 

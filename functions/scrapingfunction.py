@@ -29,11 +29,11 @@ def extract_text_from_url(link, choice, lang_wanted):
             # Call your openAI_content function here with current_sight_text
             if choice == "oeffnungszeiten":
                 oeffnungszeiten_prompt = gptprompts.oeffnungszeiten_prompt(lang_wanted)
-                zeiten, zeiten_cost, zeiten_gpt_version = gptapi.openAI_content(oeffnungszeiten_prompt, current_sight_text, 0.1, 0.5, "gpt-4-1106-preview")
+                zeiten, zeiten_cost, zeiten_gpt_version = gptapi.openAI_content(oeffnungszeiten_prompt, current_sight_text, 0.1, "gpt-4-1106-preview")
                 return zeiten, zeiten_cost
             elif choice == "eintrittskosten":
                 eintrittskosten_prompt = gptprompts.eintrittskosten_prompt(lang_wanted)
-                kosten, kosten_cost, kosten_gpt_version = gptapi.openAI_content(eintrittskosten_prompt, current_sight_text, 0.1, 0.5, "gpt-4-1106-preview")
+                kosten, kosten_cost, kosten_gpt_version = gptapi.openAI_content(eintrittskosten_prompt, current_sight_text, 0.1, "gpt-4-1106-preview")
                 return kosten, kosten_cost   
             elif choice == "summary":
                 return current_sight_text         
