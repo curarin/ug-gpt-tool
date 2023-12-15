@@ -73,8 +73,7 @@ tab1, tab2, tab5, tab4, tab6, tab7, tab8, tab3 = st.tabs([
       "🦄 Headlines + Content |",
       "🟰 Summaries |",
       "📸 Alt Texts |",
-      "🤝 Deal Content |",
-      "❓ Prompts"
+      "🤝 Deal Content |"
       ])
 
 with tab1:
@@ -82,9 +81,7 @@ with tab1:
 
 with tab2:
       sights_tab.sights_gen(gpt_version_wanted, gpt_temp_wanted, lang_wanted)
-      
-with tab3:
-      about_tab.about()
+
 
 with tab4:
       headlines.structure(gpt_version_wanted, gpt_temp_wanted, lang_wanted)
