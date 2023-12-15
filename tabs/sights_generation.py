@@ -76,7 +76,6 @@ def sights_gen(gpt_version_wanted, gpt_temp_wanted, lang_wanted):
     act_as_prompt_sights, structure_prompt_sights = gptprompts.sight_prompts(number_of_sights_wanted, destination_wanted, sights_not_needed, lang_wanted)
 
     ### API Call
-    #top_sights, top_sights_cost, top_sights_gtpversion = gptapi.openAI_content(act_as_prompt_sights, structure_prompt_sights, gpt_temp_wanted, gpt_version_wanted)
     top_sights, top_sights_cost = gptapi.openAI_json_response(structure_prompt_sights, lang_wanted)
 
     data = json.loads(top_sights)
@@ -105,7 +104,6 @@ def sights_gen(gpt_version_wanted, gpt_temp_wanted, lang_wanted):
    
        ### generate content
        new_sight_content, new_sight_content_cost, new_sight_content_gptversion = gptapi.openAI_content(act_as_prompt_sights, content_prompt_new_sight, gpt_temp_wanted, "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8W1lM7Mt")
-       #new_sight_content, new_sight_content_cost, new_sight_content_gptversion = gptapi.openAI_content(f"Du bist SEO Spezialist für ein Reiseunternehmen. Verfasse einen Text für die Sehenswürdigkeit {new_sight}", f"Antworte auf {lang_wanted}. Beschreibe die Sehenswürdigkeit {new_sight} in der Urlaubsguru Brand Tonalität.", gpt_temp_wanted, "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8VibNCct")
        sight_content_cost.append(new_sight_content_cost)
        new_sight_pic_content, new_sight_pic_content_cost, new_sight_pic_content_gptversion = gptapi.openAI_content(act_as_prompt_sights, content_pic_prompt, gpt_temp_wanted, gpt_version_wanted)
        sight_content_cost.append(new_sight_pic_content_cost)
