@@ -66,7 +66,7 @@ def check_password():
 if not check_password():
     st.stop()
 ########################################################################
-tab1, tab2, tab5, tab4, tab6, tab7, tab8, tab3 = st.tabs([
+tab1, tab2, tab5, tab4, tab6, tab7, tab8 = st.tabs([
       "🧙‍♂️ Title & Description |",
       "🏞️ Sights |",
       "🏖️ Beaches |",
