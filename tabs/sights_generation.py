@@ -90,6 +90,14 @@ def sights_gen(gpt_version_wanted, gpt_temp_wanted, lang_wanted):
         st.write(sight_to_be_added)
     st.divider()
 
+    ### define gpt models depending on language
+    if lang_wanted == "Deutsch":
+        gpt_version_wanted_sights = "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8W1lM7Mt"
+    elif lang_wanted == "Spanisch":
+        gpt_version_wanted_sights = "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8W1lM7Mt"
+    elif lang_wanted == "Holländisch":
+        gpt_version_wanted_sights = "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8W1lM7Mt"
+    
     ### Loop through sights and generate content
     sight_content_cost = []
     serp_results_cost = []
@@ -103,7 +111,7 @@ def sights_gen(gpt_version_wanted, gpt_temp_wanted, lang_wanted):
        content_prompt_new_sight, content_pic_prompt = gptprompts.new_sight_prompt(content_length_wanted, new_sight, destination_wanted, lang_wanted)
    
        ### generate content
-       new_sight_content, new_sight_content_cost, new_sight_content_gptversion = gptapi.openAI_content(act_as_prompt_sights, content_prompt_new_sight, gpt_temp_wanted, "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8W1lM7Mt")
+       new_sight_content, new_sight_content_cost, new_sight_content_gptversion = gptapi.openAI_content(act_as_prompt_sights, content_prompt_new_sight, gpt_temp_wanted, gpt_version_wanted_sights)
        sight_content_cost.append(new_sight_content_cost)
        new_sight_pic_content, new_sight_pic_content_cost, new_sight_pic_content_gptversion = gptapi.openAI_content(act_as_prompt_sights, content_pic_prompt, gpt_temp_wanted, gpt_version_wanted)
        sight_content_cost.append(new_sight_pic_content_cost)

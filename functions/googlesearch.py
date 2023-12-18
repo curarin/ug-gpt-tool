@@ -16,13 +16,13 @@ def google_serp(query, top_results_wanted, lang_wanted, country_wanted):
             cse_country = "countryCH"
     elif lang_wanted == "Spanisch":
         cse_language = "es"
-        cse_country = ""
+        cse_country = "countryES"
     elif lang_wanted == "Holländisch":
         cse_language = "nl"
-        cse_country = ""
+        cse_country = "countryNL"
     elif lang_wanted == "Englisch":
-        cse_language = "en"
-        cse_country = ""
+        cse_language = "us"
+        cse_country = "countryUS"
     
     df = adv.serp_goog(
         q=query, key=api_key, cx=cse_id, gl=cse_language, cr=cse_country)

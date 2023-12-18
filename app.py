@@ -82,7 +82,6 @@ with tab1:
 with tab2:
       sights_tab.sights_gen(gpt_version_wanted, gpt_temp_wanted, lang_wanted)
 
-
 with tab4:
       headlines.structure(gpt_version_wanted, gpt_temp_wanted, lang_wanted)
 

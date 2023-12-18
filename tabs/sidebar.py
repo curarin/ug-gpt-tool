@@ -8,15 +8,13 @@ def sidebar():
     st.markdown("<ul><li>Tools are located in the tabs on the main screen.</li><li>GPT settings can be made in the sidebar. These then apply to all tools.</li><li><b>Beware:</b> Selection of new parameters via input fields resets already queried data.</li></ul>", unsafe_allow_html=True)
     st.divider()
     st.markdown("<h4>Language Settings</h4><p>Please select the desired language for your GPT output.</p>", unsafe_allow_html=True)
-    lang_wanted = st.selectbox("Language", ["german", "english", "dutch", "spanish"])
+    lang_wanted = st.selectbox("Language", ["german", "dutch", "spanish"])
     if lang_wanted == "german":
         lang_wanted = "Deutsch"
     elif lang_wanted == "spanish":
         lang_wanted = "Spanisch"
     elif lang_wanted == "dutch":
         lang_wanted = "Holländisch"
-    elif lang_wanted == "english":
-        lang_wanted = "Englisch"
     st.divider()
     
     gpt_version_wanted = "GPT-4" #st.selectbox("GPT Version", ["GPT-4", "GPT-3.5"])

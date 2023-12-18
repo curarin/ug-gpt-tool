@@ -6,39 +6,57 @@
 
 def title_tag_prompt(template, number_of_elements_for_listicle, focus_destination, jahreszahl, aktueller_monat, emoji, special_info_template, urlaubsart_input, lang_wanted):
     act_as_prompt = f"Du bist SEO in einem Reisemagazin. Du schreibst SEO Title Tags mit maximal 65 Zeichen."
-    if template == "Inspirational: Top-10-Article":    
-        content_prompt = f"Antworte auf {lang_wanted}. Verfasse nach dem vorgegebenen Schema einen Title Tag. Der Title muss mit 'Top {number_of_elements_for_listicle} {urlaubsart_input} {focus_destination}' beginnen. Benutze am Ende einen emotionalen Trigger um Klickattraktivität zu erhöhen."
-    elif template == "Transactional: Deals":
-        content_prompt = f"Antworte auf {lang_wanted}. Verfasse einen Title Tag nach dem vorgegebenem Schema, der besonderes Augenmerk auf die Besonderheit {special_info_template} legt. Das muss vorhanden sein. Am Anfang soll außerdem stehen: {urlaubsart_input} {focus_destination}."
+    if template == "Inspirational: List-Article":    
+        content_prompt = f"Antworte auf {lang_wanted}. Verfasse einen Title Tag. Der Title muss mit 'Top {number_of_elements_for_listicle} {urlaubsart_input} {focus_destination}' beginnen. Halte dich an die trainierten Vorgaben."
+        if lang_wanted == "Spanisch":
+            content_prompt = f"Antworte auf {lang_wanted}."
+        elif lang_wanted == "Holländisch":
+            content_prompt = f"Antworte auf {lang_wanted}."
     elif template == "Transactional: Destination":
         content_prompt = f"Antworte auf {lang_wanted}. Erstelle einen SEO Title Tag für {urlaubsart_input} {focus_destination}. Falls vorhanden ergänze: {emoji} {aktueller_monat} {jahreszahl}"
+        if lang_wanted == "Spanisch":
+            content_prompt = f"Antworte auf {lang_wanted}."
+        elif lang_wanted == "Holländisch":
+            content_prompt = f"Antworte auf {lang_wanted}."
     return act_as_prompt, content_prompt
 
 def meta_description_prompt(template, number_of_elements_for_listicle, focus_destination, jahreszahl, aktueller_monat, emoji, special_info_template, urlaubsart_input, lang_wanted):
     act_as_prompt = f"Antworte auf {lang_wanted}. Du bist SEO Spezialist für ein Reiseunternehmen. Verfasse eine Google Meta Description mit maximal 155 Zeichen. Halte dich exakt an diese Längenvorgabe. Erhöhe die Klickattraktivität, indem du einen natürlichen emotionalen Trigger einbaust. Inkludiere folgende Informationen: {jahreszahl}, {aktueller_monat} {emoji}. Du bist mit den Leserinnen Per Du. Wir sprechen von uns als 'Wir'."
-    if template == "Inspirational: Top-10-Article":
+    if template == "Inspirational: List-Article":
         content_prompt = f"Antworte auf {lang_wanted}. Schreibe Top-{number_of_elements_for_listicle} {urlaubsart_input} {focus_destination} zu Beginn. Nutze wenn vorhanden dieses Emoji: {emoji}. Wenn nicht vorhanden suche ein passendes. Erwähne dann die Top Themen ({special_info_template}) in diesem Format: 1. A 2. B 3. C. Ersetze A B C durch die Top Themen aus der Liste. Erwähne außerdem {jahreszahl}, {aktueller_monat}. Am Ende ein emotionaler Call to Action."
-    elif template == "Transactional: Deals":
-        content_prompt = f"Antworte auf {lang_wanted}. Verfasse eine Google Meta Description nach dem vorgegebenem Schema. Die Description soll den User am Anfang mit seinem Bedürfnis abholen, dass er hat wenn er nach '{urlaubsart_input} {focus_destination}' sucht, danach kommunizierst du {special_info_template}. Achte auf Emotionalität. Die Google Meta Description soll die Vorfreude auf das Angebot wecken und zum kaufen verleiten. Am Ende soll ein Call to Action folgen, der Buchungsinteresse wecken soll."
+        if lang_wanted == "Spanisch":
+            content_prompt = f"Antworte auf {lang_wanted}."
+        elif lang_wanted == "Holländisch":
+            content_prompt = f"Antworte auf {lang_wanted}."    
     elif template == "Transactional: Destination":
         content_prompt = f"Antworte auf {lang_wanted}. Erstelle eine Meta Description für {urlaubsart_input} {focus_destination}. Falls vorhanden ergänze: {emoji} {aktueller_monat} {jahreszahl} "
+        if lang_wanted == "Spanisch":
+            content_prompt = f"Antworte auf {lang_wanted}."
+        elif lang_wanted == "Holländisch":
+            content_prompt = f"Antworte auf {lang_wanted}."
     return act_as_prompt, content_prompt
 
 def h1_prompt(template, number_of_elements_for_listicle, focus_destination, jahreszahl, aktueller_monat, special_info_template, urlaubsart_input, lang_wanted):
-    act_as_prompt = f"Antworte auf {lang_wanted}. Du bist SEO Spezialist für ein Reiseunternehmen. Verfasse eine H1 Headline / Hauptüberschrift. Das Fokus Keyword {urlaubsart_input} {focus_destination} steht am Anfang. Ergänze wenn vorhanden: {aktueller_monat} {jahreszahl}. "
-    if template == "Inspirational: Top-10-Article":
-        content_prompt = f"Antworte auf {lang_wanted}. Schreibe Top-{number_of_elements_for_listicle} {urlaubsart_input} {focus_destination} zu Beginn."
-    elif template == "Transactional: Deals":
-        content_prompt = f"Antworte auf {lang_wanted}. Verfasse eine SEO H1 Überschrift - kommuniziere auf jeden Fall auch {special_info_template}. "
+    act_as_prompt = f"Du bist SEO Spezialist für ein Reiseunternehmen. Du schreibst Hauptüberschriften (H1) für einen Artikel."
+    if template == "Inspirational: List-Article":
+        content_prompt = f"Antworte auf {lang_wanted}. Schreibe eine H1 Headline für die Top {number_of_elements_for_listicle} {urlaubsart_input} {focus_destination}."
+        if lang_wanted == "Spanisch":
+            content_prompt = f"Antworte auf {lang_wanted}."
+        elif lang_wanted == "Holländisch":
+            content_prompt = f"Antworte auf {lang_wanted}."
     elif template == "Transactional: Destination":
         content_prompt = f"Antworte auf {lang_wanted}. Erstelle eine H1 Überschrift für {urlaubsart_input} {focus_destination}. Falls vorhanden ergänze: {aktueller_monat} {jahreszahl}"
+        if lang_wanted == "Spanisch":
+            content_prompt = f"Antworte auf {lang_wanted}."
+        elif lang_wanted == "Holländisch":
+            content_prompt = f"Antworte auf {lang_wanted}."
     return act_as_prompt, content_prompt   
 
 ## Sehenswürdigkeiten Prompts
 # Mit nachfolgendem Prompt werden neue Sehenswürdigkeiten genannt, welche bis dato noch nicht im Artikel behandelt werden
 def sight_prompts(number_of_sights_wanted, destination_wanted, sights_not_needed, lang_wanted):
     act_as_prompt_sights = f"Du bist SEO Spezialist für ein Reiseunternehmen. Du verfasst einen Sehenswürdigkeiten Artikel in der Urlaubsguru Brand Tonalität."
-    structure_prompt_sights = f"Antworte auf {lang_wanted}. Nenne mir exakt {number_of_sights_wanted} Sehenswürdigkeiten, die man in {destination_wanted} abseits von {sights_not_needed} unbedingt gesehen haben? "
+    structure_prompt_sights = f"Antworte auf {lang_wanted}. Nenne mir exakt {number_of_sights_wanted} Sehenswürdigkeiten, die man in {destination_wanted} abseits von {sights_not_needed} unbedingt gesehen haben. Wenn es weniger geben sollte, dann antworte mit ausschließlich denen, die du kennst."
     #structure_famous_prompts = f"Antworte auf {lang_wanted}. Nenne mir exakt 3 berühmte Sehenswürdigkeiten auf {destination_wanted}."
     return act_as_prompt_sights, structure_prompt_sights
 
@@ -92,11 +110,11 @@ def create_summary(lang_wanted, content):
 #### Beaches Prompts
 def beach_prompts(number_of_beaches_wanted, destination_wanted, beaches_not_needed, lang_wanted):
     act_as_prompt_sights = f"Du bist SEO Spezialist für ein Reiseunternehmen. Du verfasst Artikel über die schönsten Strände dieser Welt in der Urlaubsguru-Brand-Tonalität."
-    structure_prompt_sights = f"Antworte auf {lang_wanted}. Nenne mir exakt {number_of_beaches_wanted} Strände, die man in {destination_wanted} abseits von {beaches_not_needed} unbedingt gesehen haben?"
+    structure_prompt_sights = f"Antworte auf {lang_wanted}. Nenne mir exakt {number_of_beaches_wanted} Strände, die man in {destination_wanted} abseits von {beaches_not_needed} unbedingt gesehen haben? Wenn es weniger geben sollte, dann antworte mit ausschließlich denen, die du kennst."
     return act_as_prompt_sights, structure_prompt_sights
 
 def new_beach_prompt(content_length_wanted_beaches, beach, destination_wanted_for_beach, lang_wanted):
-    content_prompt_new_sight = f"Antworte auf {lang_wanted}. Erzähle etwas über den Strand {beach}. Maximal {content_length_wanted_beaches} Worte. Was macht ihn so besonders? Warum muss man als Tourist dort hin? Schreibe in der Urlaubsguru Brand Tonalität."
+    content_prompt_new_sight = f"Antworte auf {lang_wanted}. Erzähle etwas über den Strand {beach}. Schreibe {content_length_wanted_beaches} Worte. Was macht ihn so besonders? Warum muss man als Tourist dort hin? Schreibe in der Urlaubsguru Brand Tonalität."
     return content_prompt_new_sight
 
 
