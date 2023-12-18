@@ -8,15 +8,11 @@ def title_tag_prompt(template, number_of_elements_for_listicle, focus_destinatio
     act_as_prompt = f"Du bist SEO in einem Reisemagazin. Du schreibst SEO Title Tags mit maximal 65 Zeichen."
     if template == "Inspirational: List-Article":    
         content_prompt = f"Antworte auf {lang_wanted}. Verfasse einen Title Tag. Der Title muss mit 'Top {number_of_elements_for_listicle} {urlaubsart_input} {focus_destination}' beginnen. Halte dich an die trainierten Vorgaben."
-        if lang_wanted == "Spanisch":
-            content_prompt = f"Antworte auf {lang_wanted}."
-        elif lang_wanted == "Holländisch":
+        if lang_wanted == "Spanisch" or lang_wanted == "Holländisch":
             content_prompt = f"Antworte auf {lang_wanted}."
     elif template == "Transactional: Destination":
         content_prompt = f"Antworte auf {lang_wanted}. Erstelle einen SEO Title Tag für {urlaubsart_input} {focus_destination}. Falls vorhanden ergänze: {emoji} {aktueller_monat} {jahreszahl}"
-        if lang_wanted == "Spanisch":
-            content_prompt = f"Antworte auf {lang_wanted}."
-        elif lang_wanted == "Holländisch":
+        if lang_wanted == "Spanisch" or lang_wanted == "Holländisch":
             content_prompt = f"Antworte auf {lang_wanted}."
     return act_as_prompt, content_prompt
 
@@ -24,32 +20,24 @@ def meta_description_prompt(template, number_of_elements_for_listicle, focus_des
     act_as_prompt = f"Antworte auf {lang_wanted}. Du bist SEO Spezialist für ein Reiseunternehmen. Verfasse eine Google Meta Description mit maximal 155 Zeichen. Halte dich exakt an diese Längenvorgabe. Erhöhe die Klickattraktivität, indem du einen natürlichen emotionalen Trigger einbaust. Inkludiere folgende Informationen: {jahreszahl}, {aktueller_monat} {emoji}. Du bist mit den Leserinnen Per Du. Wir sprechen von uns als 'Wir'."
     if template == "Inspirational: List-Article":
         content_prompt = f"Antworte auf {lang_wanted}. Schreibe Top-{number_of_elements_for_listicle} {urlaubsart_input} {focus_destination} zu Beginn. Nutze wenn vorhanden dieses Emoji: {emoji}. Wenn nicht vorhanden suche ein passendes. Erwähne dann die Top Themen ({special_info_template}) in diesem Format: 1. A 2. B 3. C. Ersetze A B C durch die Top Themen aus der Liste. Erwähne außerdem {jahreszahl}, {aktueller_monat}. Am Ende ein emotionaler Call to Action."
-        if lang_wanted == "Spanisch":
-            content_prompt = f"Antworte auf {lang_wanted}."
-        elif lang_wanted == "Holländisch":
-            content_prompt = f"Antworte auf {lang_wanted}."    
+        if lang_wanted == "Spanisch" or lang_wanted == "Holländisch":
+            content_prompt = f"Antworte auf {lang_wanted}."  
     elif template == "Transactional: Destination":
         content_prompt = f"Antworte auf {lang_wanted}. Erstelle eine Meta Description für {urlaubsart_input} {focus_destination}. Falls vorhanden ergänze: {emoji} {aktueller_monat} {jahreszahl} "
-        if lang_wanted == "Spanisch":
-            content_prompt = f"Antworte auf {lang_wanted}."
-        elif lang_wanted == "Holländisch":
-            content_prompt = f"Antworte auf {lang_wanted}."
+        if lang_wanted == "Spanisch" or lang_wanted == "Holländisch":
+            content_prompt = f"Antworte auf {lang_wanted}. Erstelle eine Meta Description für {urlaubsart_input} {focus_destination}. Falls vorhanden ergänze: {emoji} {aktueller_monat} {jahreszahl}. Die Meta Description darf maximal 155 Zeichen haben."
     return act_as_prompt, content_prompt
 
 def h1_prompt(template, number_of_elements_for_listicle, focus_destination, jahreszahl, aktueller_monat, special_info_template, urlaubsart_input, lang_wanted):
     act_as_prompt = f"Du bist SEO Spezialist für ein Reiseunternehmen. Du schreibst Hauptüberschriften (H1) für einen Artikel."
     if template == "Inspirational: List-Article":
         content_prompt = f"Antworte auf {lang_wanted}. Schreibe eine H1 Headline für die Top {number_of_elements_for_listicle} {urlaubsart_input} {focus_destination}."
-        if lang_wanted == "Spanisch":
-            content_prompt = f"Antworte auf {lang_wanted}."
-        elif lang_wanted == "Holländisch":
+        if lang_wanted == "Spanisch" or lang_wanted == "Holländisch":
             content_prompt = f"Antworte auf {lang_wanted}."
     elif template == "Transactional: Destination":
         content_prompt = f"Antworte auf {lang_wanted}. Erstelle eine H1 Überschrift für {urlaubsart_input} {focus_destination}. Falls vorhanden ergänze: {aktueller_monat} {jahreszahl}"
-        if lang_wanted == "Spanisch":
-            content_prompt = f"Antworte auf {lang_wanted}."
-        elif lang_wanted == "Holländisch":
-            content_prompt = f"Antworte auf {lang_wanted}."
+        if lang_wanted == "Spanisch" or lang_wanted == "Holländisch":
+            content_prompt = f"Antworte auf {lang_wanted}. Erstelle eine H1 Überschrift für {urlaubsart_input} {focus_destination}. Falls vorhanden ergänze: {aktueller_monat} {jahreszahl}. Folge dem Beispiel 'Urlaub Mallorca 2024', oder auf Spanisch 'Viajes canarias 2024', oder auf Holländisch 'Griekenland vakantie 2024'"
     return act_as_prompt, content_prompt   
 
 ## Sehenswürdigkeiten Prompts
