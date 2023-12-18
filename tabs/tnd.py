@@ -110,24 +110,27 @@ def tnd(gpt_version_wanted, gpt_temp_wanted, lang_wanted):
                     selected_emoji_descr = ""
         
         #logic to determine which finetuned gpt models are used
+        if lang_wanted == "Deutsch":
+            gpt_temp_wanted_title = 0.1
+            gpt_temp_wanted_descr = 0.1
+            gpt_temp_wanted_h1 = 0.1
+        elif lang_wanted == "Spanisch" or lang_wanted == "Holländisch":
+            gpt_temp_wanted_title = gpt_temp_wanted
+            gpt_temp_wanted_descr = gpt_temp_wanted
+            gpt_temp_wanted_h1 = gpt_temp_wanted
+
         if tnd_template_choice == "Transactional: Destination" and lang_wanted == "Deutsch":
             gpt_version_wanted_title = "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8Uat3tmq"
-            gpt_temp_wanted_title = 0.1
             gpt_version_wanted_descr = "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8UayOp16"
-            gpt_temp_wanted_descr = 0.1
             gpt_version_wanted_h1 = "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8UbLqj0V"
-            gpt_temp_wanted_h1 = 0.1
         elif tnd_template_choice == "Inspirational: List-Article" and lang_wanted == "Deutsch":
             gpt_version_wanted_title = "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8X9LXV3I"
             gpt_version_wanted_descr = gpt_version_wanted
             gpt_version_wanted_h1 = "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8X8uR2wt"
         else:
             gpt_version_wanted_title = gpt_version_wanted
-            gpt_temp_wanted_title = gpt_temp_wanted
             gpt_version_wanted_descr = gpt_version_wanted
-            gpt_temp_wanted_descr = gpt_temp_wanted
             gpt_version_wanted_h1 = gpt_version_wanted
-            gpt_temp_wanted_h1 = gpt_temp_wanted
         
         ####
         form_submit_tnd_input_values = st.form_submit_button(label="Generate content")
