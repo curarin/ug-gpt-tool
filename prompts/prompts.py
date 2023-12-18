@@ -38,12 +38,13 @@ def h1_prompt(template, number_of_elements_for_listicle, focus_destination, jahr
 # Mit nachfolgendem Prompt werden neue Sehenswürdigkeiten genannt, welche bis dato noch nicht im Artikel behandelt werden
 def sight_prompts(number_of_sights_wanted, destination_wanted, sights_not_needed, lang_wanted):
     act_as_prompt_sights = f"Du bist SEO Spezialist für ein Reiseunternehmen. Du verfasst einen Sehenswürdigkeiten Artikel in der Urlaubsguru Brand Tonalität."
-    structure_prompt_sights = f"Antworte auf {lang_wanted}. Nenne mir exakt {number_of_sights_wanted} Sehenswürdigkeiten, die man in {destination_wanted} abseits von {sights_not_needed} unbedingt gesehen haben? Antworte mit einer Python Liste der Sehenswürdigkeiten. Inkludiere keinerlei Erklärungen."
+    structure_prompt_sights = f"Antworte auf {lang_wanted}. Nenne mir exakt {number_of_sights_wanted} Sehenswürdigkeiten, die man in {destination_wanted} abseits von {sights_not_needed} unbedingt gesehen haben? "
+    #structure_famous_prompts = f"Antworte auf {lang_wanted}. Nenne mir exakt 3 berühmte Sehenswürdigkeiten auf {destination_wanted}."
     return act_as_prompt_sights, structure_prompt_sights
 
 # Mit nachfolgendem Prompt wird der beschreibende Text sowie der Bild-Tipp für jede neue Sehenswürdigkeit generiert
 def new_sight_prompt(content_length_wanted, new_sight, destination_wanted, lang_wanted):
-    content_prompt_new_sight = f"Antworte auf {lang_wanted}. Beschreibe die Sehenswürdigkeit {new_sight} in {destination_wanted} in der Urlaubsguru Brand Tonalität."
+    content_prompt_new_sight = f"Antworte auf {lang_wanted}. Schreibe maximal {content_length_wanted} Wörter. Beschreibe die Sehenswürdigkeit {new_sight} in {destination_wanted} in der Urlaubsguru Brand Tonalität."
     content_pic_prompt = f"Antworte auf {lang_wanted}. Schreibe maximal 50 Wörter: Was muss auf einem Bild für {new_sight} zu sehen sein, damit die Sehenswürdigkeit gut zur Geltung kommt und die Zielgruppe diese gerne besuchen möchte?"
     return content_prompt_new_sight, content_pic_prompt
 
@@ -90,12 +91,12 @@ def create_summary(lang_wanted, content):
 
 #### Beaches Prompts
 def beach_prompts(number_of_beaches_wanted, destination_wanted, beaches_not_needed, lang_wanted):
-    act_as_prompt_sights = f"Antworte auf {lang_wanted}. Du bist eine reisebegeisterte und erfahrene Redakteurin mit SEO-Fokus und Reiseexpertin."
-    structure_prompt_sights = f"Antworte auf {lang_wanted}. Nenne mir exakt {number_of_beaches_wanted} Strände, die man in {destination_wanted} abseits von {beaches_not_needed} unbedingt gesehen haben? Antworte mit einer Python Liste der Sehenswürdigkeiten. Inkludiere keinerlei Erklärungen."
+    act_as_prompt_sights = f"Du bist SEO Spezialist für ein Reiseunternehmen. Du verfasst Artikel über die schönsten Strände dieser Welt in der Urlaubsguru-Brand-Tonalität."
+    structure_prompt_sights = f"Antworte auf {lang_wanted}. Nenne mir exakt {number_of_beaches_wanted} Strände, die man in {destination_wanted} abseits von {beaches_not_needed} unbedingt gesehen haben?"
     return act_as_prompt_sights, structure_prompt_sights
 
 def new_beach_prompt(content_length_wanted_beaches, beach, destination_wanted_for_beach, lang_wanted):
-    content_prompt_new_sight = f"Antworte auf {lang_wanted}. Erzähle etwas über den Strand {beach}. Maximal {content_length_wanted_beaches} Worte. Was macht ihn so besonders? Warum muss man als Tourist dort hin? Was zeichnet diesen Strand aus im Vergleich zu anderen Stränden in {destination_wanted_for_beach}? Verwende malerische Sprache. Du bist Per Du mit der Leserschaft. Du sprichst die Leserschaft im Plural an. Stelle sicher, dass der Text die Leser dazu ermutigt {beach} zu besuchen."
+    content_prompt_new_sight = f"Antworte auf {lang_wanted}. Erzähle etwas über den Strand {beach}. Maximal {content_length_wanted_beaches} Worte. Was macht ihn so besonders? Warum muss man als Tourist dort hin? Schreibe in der Urlaubsguru Brand Tonalität."
     return content_prompt_new_sight
 
 

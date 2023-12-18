@@ -80,7 +80,7 @@ def beach_gen(gpt_version_wanted, gpt_temp_wanted, lang_wanted):
        content_prompt_new_sight = gptprompts.new_beach_prompt(content_length_wanted_beaches, beach, destination_wanted_for_beach, lang_wanted)
    
        ### generate content
-       new_beach_content, new_beach_content_cost, new_beach_content_gptversion = gptapi.openAI_content(act_as_prompt_beach, content_prompt_new_sight, gpt_temp_wanted, gpt_version_wanted)
+       new_beach_content, new_beach_content_cost, new_beach_content_gptversion = gptapi.openAI_content(act_as_prompt_beach, content_prompt_new_sight, gpt_temp_wanted, "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8X5sqhwW")
        beach_content_cost.append(new_beach_content_cost)
 
 
