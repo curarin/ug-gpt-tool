@@ -28,7 +28,6 @@ def sights_gen(gpt_version_wanted, gpt_temp_wanted, lang_wanted):
                <li>Enter the required word count per sight.</li>
                <li>Enter the destination for which new sights should be generated.</li>
                <li>In case of an article update: Insert all currently existing sights in the article. This ensures that these points of interest are <b>not</b> generated explicitly.</li>
-               <li>Enter the desired search results, which are searched for current opening times and ticket prices. <b>Recommendation</b>: Top 3 is usually sufficient. (Data source: Bing)</li>
                <li>Click on the <b><u>Generate sights</u></b> button.</li>
                <li>If necessary, all generated content can be downloaded as an Excel document.</li>
                </ul>""", unsafe_allow_html=True)
@@ -61,10 +60,10 @@ def sights_gen(gpt_version_wanted, gpt_temp_wanted, lang_wanted):
         st.markdown("**Get current data for ticket prizes and opening hours from google:**")
         if lang_wanted == "Deutsch":
             country_wanted = st.selectbox("Choose country for google results", ["Deutschland", "Österreich", "Schweiz"], key = "selectbox country input")
-            number_of_search_results_wanted = 3
+            number_of_search_results_wanted = 1
         else:
             country_wanted = ""
-            number_of_search_results_wanted = st.number_input("How many top search results should be crawled for opening times & ticket prices?", min_value=1, max_value=5, value=3, placeholder="Enter number of crawling results...", key = "number of sights wanted for upgrading")
+            number_of_search_results_wanted = st.number_input("How many top search results should be crawled for opening times & ticket prices?", min_value=1, max_value=5, value=1, placeholder="Enter number of crawling results...", key = "number of sights wanted for upgrading")
 
     form_submit_sights_input_values = st.form_submit_button(label="Generate content")
 
@@ -206,6 +205,6 @@ def sights_gen(gpt_version_wanted, gpt_temp_wanted, lang_wanted):
         return excel_data
     new_sights_excel = convert_df_to_excel(df_html_new_sights)
 
-    st.download_button(f"Download sight conbtent for {destination_wanted} as Excel-spreadsheet", data=new_sights_excel, file_name=f"{destination_wanted}_new_sights.xlsx", mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    st.download_button(f"Download sight content for {destination_wanted} as Excel-spreadsheet", data=new_sights_excel, file_name=f"new_sights_for_{destination_wanted}_via_gpt.xlsx", mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
     st.divider()
     #####################
