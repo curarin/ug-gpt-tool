@@ -51,7 +51,7 @@ def openAI_json_response(user_prompt, lang_wanted):
 
 @st.cache_data
 def openAI_content(system_act_as, user_prompt, temp_wanted, gpt_version):
-    response = client.chat.completions.create( #).ChatCompletion.create(
+    response = client.chat.completions.create( 
         model=gpt_version,
         messages=[
             {"role": "system", "content": system_act_as},
