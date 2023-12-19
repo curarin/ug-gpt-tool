@@ -125,7 +125,7 @@ def tnd(gpt_version_wanted, gpt_temp_wanted, lang_wanted):
             gpt_version_wanted_h1 = "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8UbLqj0V"
         elif tnd_template_choice == "Inspirational: List-Article" and lang_wanted == "Deutsch":
             gpt_version_wanted_title = "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8X9LXV3I"
-            gpt_version_wanted_descr = gpt_version_wanted
+            gpt_version_wanted_descr = "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8XRYtx2E"
             gpt_version_wanted_h1 = "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8X8uR2wt"
         else:
             gpt_version_wanted_title = gpt_version_wanted

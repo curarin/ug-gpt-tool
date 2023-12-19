@@ -21,7 +21,7 @@ def meta_description_prompt(template, number_of_elements_for_listicle, focus_des
     if template == "Inspirational: List-Article":
         content_prompt = f"Antworte auf {lang_wanted}. Schreibe Top-{number_of_elements_for_listicle} {urlaubsart_input} {focus_destination} zu Beginn. Nutze wenn vorhanden dieses Emoji: {emoji}. Wenn nicht vorhanden suche ein passendes. Erwähne dann die Top Themen ({special_info_template}) in diesem Format: 1. A 2. B 3. C. Ersetze A B C durch die Top Themen aus der Liste. Erwähne außerdem {jahreszahl}, {aktueller_monat}. Am Ende ein emotionaler Call to Action."
         if lang_wanted == "Spanisch" or lang_wanted == "Holländisch":
-            content_prompt = f"Antworte auf {lang_wanted}."  
+            content_prompt = f"Antworte auf {lang_wanted}. Schreibe Top-{number_of_elements_for_listicle} {urlaubsart_input} {focus_destination} zu Beginn. Nutze wenn vorhanden dieses Emoji: {emoji}. Wenn nicht vorhanden suche ein passendes. Erwähne dann die Top Themen ({special_info_template}) in diesem Format: 1. A 2. B 3. C. Ersetze A B C durch die Top Themen aus der Liste. Erwähne außerdem {jahreszahl}, {aktueller_monat}. Am Ende ein emotionaler Call to Action."  
     elif template == "Transactional: Destination":
         content_prompt = f"Antworte auf {lang_wanted}. Erstelle eine Meta Description für {urlaubsart_input} {focus_destination}. Falls vorhanden ergänze: {emoji} {aktueller_monat} {jahreszahl} "
         if lang_wanted == "Spanisch" or lang_wanted == "Holländisch":
@@ -33,7 +33,7 @@ def h1_prompt(template, number_of_elements_for_listicle, focus_destination, jahr
     if template == "Inspirational: List-Article":
         content_prompt = f"Antworte auf {lang_wanted}. Schreibe eine H1 Headline für die Top {number_of_elements_for_listicle} {urlaubsart_input} {focus_destination}."
         if lang_wanted == "Spanisch" or lang_wanted == "Holländisch":
-            content_prompt = f"Antworte auf {lang_wanted}."
+            content_prompt = f"Antworte auf {lang_wanted}. Erstelle eine H1 Überschrift für die Top {number_of_elements_for_listicle} {urlaubsart_input} {focus_destination}. Folge dabei dem Beispiel 'Top 15 Sehenswürdigkeiten in Wien', oder auf Spanisch '15 lugares que visitar en viena imprescindibles', oder auf Holländisch 'Bezienswaardigheden van wenen: Bekijk de top 12'."
     elif template == "Transactional: Destination":
         content_prompt = f"Antworte auf {lang_wanted}. Erstelle eine H1 Überschrift für {urlaubsart_input} {focus_destination}. Falls vorhanden ergänze: {aktueller_monat} {jahreszahl}"
         if lang_wanted == "Spanisch" or lang_wanted == "Holländisch":
