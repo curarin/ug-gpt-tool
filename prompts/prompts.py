@@ -5,39 +5,44 @@
 # Das Template "Deals" soll dabei die Redakteur:innen anleiten einen Longtail zu formen, indem spezifische Informationen noch angegeben werden
 
 def title_tag_prompt(template, number_of_elements_for_listicle, focus_destination, jahreszahl, aktueller_monat, emoji, special_info_template, urlaubsart_input, lang_wanted):
-    act_as_prompt = f"Du bist SEO in einem Reisemagazin. Du schreibst SEO Title Tags mit maximal 65 Zeichen."
+    act_as_prompt = f"Du bist SEO in einem Reisemagazin. Du schreibst SEO Title Tags mit 65 Zeichen."
     if template == "Inspirational: List-Article":    
         content_prompt = f"Antworte auf {lang_wanted}. Verfasse einen Title Tag. Der Title muss mit 'Top {number_of_elements_for_listicle} {urlaubsart_input} {focus_destination}' beginnen. Halte dich an die trainierten Vorgaben."
         if lang_wanted == "Spanisch" or lang_wanted == "Holländisch":
-            content_prompt = f"Antworte auf {lang_wanted}. Überlege dir die Antwort auf {lang_wanted} - ich möchte keine Übersetzung der deutschen Version. Verfasse einen SEO Title Tag mit maximal 65 Zeichen. Der Title muss mit 'Top {number_of_elements_for_listicle} {urlaubsart_input} {focus_destination}' beginnen. Schreibe mit Emotionen, aber sprich die Leute per Du an. "
+            content_prompt = f"Antworte auf {lang_wanted}. Überlege dir die Antwort auf {lang_wanted}. Verfasse einen SEO Title Tag mit 65 Zeichen. Der Title muss mit 'Top {number_of_elements_for_listicle} {urlaubsart_input} {focus_destination}' beginnen. Folge dabei dem Beispiel 'Top 15 Sehenswürdigkeiten in Wien', oder auf Spanisch '15 lugares que visitar en viena imprescindibles', oder auf Holländisch 'Bezienswaardigheden van wenen: Bekijk de top 12'. "
     elif template == "Transactional: Destination":
         content_prompt = f"Antworte auf {lang_wanted}. Erstelle einen SEO Title Tag für {urlaubsart_input} {focus_destination}. Falls vorhanden ergänze: {emoji} {aktueller_monat} {jahreszahl}"
         if lang_wanted == "Spanisch" or lang_wanted == "Holländisch":
-            content_prompt = f"Antworte auf {lang_wanted}. Überlege dir die Antwort auf {lang_wanted} - ich möchte keine Übersetzung der deutschen Version. Verfasse einen SEO Title Tag mit maximal 65 Zeichen. Der Title muss {urlaubsart_input} {focus_destination} beinhalten. Falls vorhanden ergänze: {emoji} {aktueller_monat} {jahreszahl}. Der Title hat dabei folgende Struktur: Urlaubsart Destination - Zusätzliche Informationen. Füge am Ende, falls noch Platz ist, Emotionen hinzu, die zum Kauf anregen sollen."
+            content_prompt = f"Antworte auf {lang_wanted}. Überlege dir die Antwort auf {lang_wanted}. Verfasse einen SEO Title Tag mit 65 Zeichen. Der Title muss {urlaubsart_input} {focus_destination} beinhalten. Falls vorhanden ergänze: {emoji} {aktueller_monat} {jahreszahl}. Folge dem Beispiel 'Urlaub Mallorca 2024', oder auf Spanisch 'Viajes canarias 2024', oder auf Holländisch 'Griekenland vakantie 2024'."
     return act_as_prompt, content_prompt
 
 def meta_description_prompt(template, number_of_elements_for_listicle, focus_destination, jahreszahl, aktueller_monat, emoji, special_info_template, urlaubsart_input, lang_wanted):
-    act_as_prompt = f"Antworte auf {lang_wanted}. Du bist SEO Spezialist für ein Reiseunternehmen. Verfasse eine Google Meta Description mit maximal 155 Zeichen. Halte dich exakt an diese Längenvorgabe. Erhöhe die Klickattraktivität, indem du einen natürlichen emotionalen Trigger einbaust. Inkludiere folgende Informationen: {jahreszahl}, {aktueller_monat} {emoji}. Du bist mit den Leserinnen Per Du. Wir sprechen von uns als 'Wir'."
+    act_as_prompt = f"Antworte auf {lang_wanted}. Du bist SEO Spezialist für ein Reiseunternehmen. Verfasse eine Google Meta Description mit maximal 155 Zeichen. HHalte dich an die trainierten Vorgaben."
     if template == "Inspirational: List-Article":
-        content_prompt = f"Antworte auf {lang_wanted}. Schreibe Top-{number_of_elements_for_listicle} {urlaubsart_input} {focus_destination} zu Beginn. Nutze wenn vorhanden dieses Emoji: {emoji}. Wenn nicht vorhanden suche ein passendes. Erwähne dann die Top Themen ({special_info_template}) in diesem Format: 1. A 2. B 3. C. Ersetze A B C durch die Top Themen aus der Liste. Erwähne außerdem {jahreszahl}, {aktueller_monat}. Am Ende ein emotionaler Call to Action."
+        if urlaubsart_input == "Sehenswürdigkeiten":
+            content_prompt = f"Schreibe Top {number_of_elements_for_listicle} {urlaubsart_input} {focus_destination} zu Beginn. Erwähne mit ✅-Emoji als Bulletpoint die Top Themen: {special_info_template}. Erwähne 'inkl. Guru-Touren von 1-4 Tagen'."
+        elif urlaubsart_input == "Geheimtipps":
+            content_prompt = f"Schreibe Top {number_of_elements_for_listicle} Geheimtipps {focus_destination} zu Beginn. Erwähne mit ✅-Emoji als Bulletpoint die Top Themen: {special_info_template}."
+        else:
+            content_prompt = f"Schreibe Top {number_of_elements_for_listicle} {urlaubsart_input} {focus_destination} zu Beginn. Erwähne mit ✅-Emoji als Bulletpoint die Top Themen: {special_info_template}."
         if lang_wanted == "Spanisch" or lang_wanted == "Holländisch":
-            content_prompt = f"Antworte auf {lang_wanted}. Überlege dir die Antwort auf {lang_wanted} - ich möchte keine Übersetzung der deutschen Version. Schreibe Top-{number_of_elements_for_listicle} {urlaubsart_input} {focus_destination} zu Beginn. Nutze wenn vorhanden dieses Emoji: {emoji}. Wenn nicht vorhanden suche ein passendes. Erwähne dann die Top Themen ({special_info_template}) in diesem Format: 1. A 2. B 3. C. Ersetze A B C durch die Top Themen aus der Liste. Erwähne außerdem {jahreszahl}, {aktueller_monat}. Am Ende ein emotionaler Call to Action."  
+            content_prompt = f"Antworte auf {lang_wanted}. Überlege dir die Antwort auf {lang_wanted}. Schreibe Top-{number_of_elements_for_listicle} {urlaubsart_input} {focus_destination} zu Beginn. Nutze wenn vorhanden dieses Emoji: {emoji}. Wenn nicht vorhanden suche ein passendes. Erwähne dann die Top Themen ({special_info_template}) in diesem Format: 1. A 2. B 3. C. Ersetze A B C durch die Top Themen aus der Liste. Erwähne außerdem {jahreszahl}, {aktueller_monat}. Am Ende ein emotionaler Call to Action."  
     elif template == "Transactional: Destination":
         content_prompt = f"Antworte auf {lang_wanted}. Erstelle eine Meta Description für {urlaubsart_input} {focus_destination}. Falls vorhanden ergänze: {emoji} {aktueller_monat} {jahreszahl} "
         if lang_wanted == "Spanisch" or lang_wanted == "Holländisch":
-            content_prompt = f"Antworte auf {lang_wanted}. Überlege dir die Antwort auf {lang_wanted} - ich möchte keine Übersetzung der deutschen Version. Erstelle eine Meta Description mit maximal 155 Zeichen für {urlaubsart_input} {focus_destination}. Falls vorhanden ergänze: {emoji} {aktueller_monat} {jahreszahl}. Die Meta Description darf maximal 155 Zeichen haben. Verwende am Ende eine Aufforderung / einen Call to Action, der die Leute auf die Buchung hinweist. Schreib Emotional. Sei mit den Lesern Per Du. Verwende keine Floskeln."
+            content_prompt = f"Antworte auf {lang_wanted}. Überlege dir die Antwort auf {lang_wanted}. Erstelle eine Meta Description mit maximal 155 Zeichen für {urlaubsart_input} {focus_destination}. Falls vorhanden ergänze: {emoji} {aktueller_monat} {jahreszahl}. Verwende am Ende eine Aufforderung / einen Call to Action, der die Leute auf die Buchung hinweist. Schreib Emotional. Sei mit den Lesern Per Du. Verwende keine Floskeln."
     return act_as_prompt, content_prompt
 
 def h1_prompt(template, number_of_elements_for_listicle, focus_destination, jahreszahl, aktueller_monat, special_info_template, urlaubsart_input, lang_wanted):
-    act_as_prompt = f"Du bist SEO Spezialist für ein Reiseunternehmen. Du schreibst Hauptüberschriften (H1) für einen Artikel."
+    act_as_prompt = f"Du bist SEO Spezialist für ein Reiseunternehmen. Du schreibst Hauptüberschriften (H1) für einen Artikel. Halte dich an die trainierten Vorgaben."
     if template == "Inspirational: List-Article":
         content_prompt = f"Antworte auf {lang_wanted}. Schreibe eine H1 Headline für die Top {number_of_elements_for_listicle} {urlaubsart_input} {focus_destination}."
         if lang_wanted == "Spanisch" or lang_wanted == "Holländisch":
-            content_prompt = f"Antworte auf {lang_wanted}. Erstelle eine H1 Überschrift für die Top {number_of_elements_for_listicle} {urlaubsart_input} {focus_destination}. Folge dabei dem Beispiel 'Top 15 Sehenswürdigkeiten in Wien', oder auf Spanisch '15 lugares que visitar en viena imprescindibles', oder auf Holländisch 'Bezienswaardigheden van wenen: Bekijk de top 12'. Schreib Emotional. Sei mit den Lesern Per Du. Verwende keine Floskeln."
+            content_prompt = f"Antworte auf {lang_wanted}. Erstelle eine H1 Überschrift für die Top {number_of_elements_for_listicle} {urlaubsart_input} {focus_destination}. Folge dabei dem Beispiel 'Top 15 Sehenswürdigkeiten in Wien', oder auf Spanisch '15 lugares que visitar en viena imprescindibles', oder auf Holländisch 'Bezienswaardigheden van wenen: Bekijk de top 12'."
     elif template == "Transactional: Destination":
         content_prompt = f"Antworte auf {lang_wanted}. Erstelle eine H1 Überschrift für {urlaubsart_input} {focus_destination}. Falls vorhanden ergänze: {aktueller_monat} {jahreszahl}"
         if lang_wanted == "Spanisch" or lang_wanted == "Holländisch":
-            content_prompt = f"Antworte auf {lang_wanted}. Erstelle eine H1 Überschrift für {urlaubsart_input} {focus_destination}. Falls vorhanden ergänze: {aktueller_monat} {jahreszahl}. Folge dem Beispiel 'Urlaub Mallorca 2024', oder auf Spanisch 'Viajes canarias 2024', oder auf Holländisch 'Griekenland vakantie 2024'. Schreib Emotional. Sei mit den Lesern Per Du. Verwende keine Floskeln."
+            content_prompt = f"Antworte auf {lang_wanted}. Erstelle eine H1 Überschrift für {urlaubsart_input} {focus_destination}. Falls vorhanden ergänze: {aktueller_monat} {jahreszahl}. Folge dem Beispiel 'Urlaub Mallorca 2024', oder auf Spanisch 'Viajes canarias 2024', oder auf Holländisch 'Griekenland vakantie 2024'."
     return act_as_prompt, content_prompt   
 
 ## Sehenswürdigkeiten Prompts

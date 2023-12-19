@@ -70,13 +70,7 @@ def tnd(gpt_version_wanted, gpt_temp_wanted, lang_wanted):
             if tnd_template_choice == "Transactional: Destination":
                 urlaubsart_input = st.text_input("Enter type of holiday: (holiday, wellness weekend, weekend trip, all-inclusive, last minute,...)", key = "urlaubsart_input")
             elif tnd_template_choice == "Inspirational: List-Article":
-                urlaubsart_input = st.selectbox("Choose List-Article-Type:", ["Sights", "Restaurants", "Activities"], key = "sights_urlaubsart_input")
-                if urlaubsart_input == "Sights":
-                    urlaubsart_input = "Sehenswürdigkeiten"
-                elif urlaubsart_input == "Restaurants":
-                    urlaubsart_input = "Restaurants"
-                elif urlaubsart_input == "Activities":
-                    urlaubsart_input = "Aktivitäten & Ausflüge"
+                urlaubsart_input = st.selectbox("Choose List-Article-Type:", ["Sights", "Beaches", "Secret Spots"], key = "sights_urlaubsart_input")
                 number_of_elements_for_listicle = st.slider("Number of elements in the top X article", 6, 30, key = "generic_listicle_number_of_elements_input")
                 special_info_template = st.text_area("Which top sights/activities/... are the most important? Name 3:", key = "generic_listicle_must_have_input")
                 special_info_template = [special_info_template.strip() for special_info_template in special_info_template.split("\n")]
@@ -110,23 +104,70 @@ def tnd(gpt_version_wanted, gpt_temp_wanted, lang_wanted):
                     selected_emoji_descr = ""
         
         #logic to determine which finetuned gpt models are used
+        # temp used
         if lang_wanted == "Deutsch":
-            gpt_temp_wanted_title = 0.1
-            gpt_temp_wanted_descr = 0.1
-            gpt_temp_wanted_h1 = 0.1
+            gpt_temp_wanted_title = 0.7
+            gpt_temp_wanted_descr = 0.7
+            gpt_temp_wanted_h1 = 0.7
         elif lang_wanted == "Spanisch" or lang_wanted == "Holländisch":
             gpt_temp_wanted_title = gpt_temp_wanted
             gpt_temp_wanted_descr = gpt_temp_wanted
             gpt_temp_wanted_h1 = gpt_temp_wanted
 
+        #gpt model used based on listicle specifics        
+
+
+        
         if tnd_template_choice == "Transactional: Destination" and lang_wanted == "Deutsch":
             gpt_version_wanted_title = "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8Uat3tmq"
             gpt_version_wanted_descr = "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8UayOp16"
             gpt_version_wanted_h1 = "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8UbLqj0V"
         elif tnd_template_choice == "Inspirational: List-Article" and lang_wanted == "Deutsch":
-            gpt_version_wanted_title = "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8X9LXV3I"
-            gpt_version_wanted_descr = "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8XRYtx2E"
-            gpt_version_wanted_h1 = "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8X8uR2wt"
+            if urlaubsart_input == "Sights":
+                if lang_wanted == "Deutsch":
+                    urlaubsart_input = "Sehenswürdigkeiten"
+                elif lang_wanted == "Spanisch":
+                    urlaubsart_input = "lugares que visitar en"
+                elif lang_wanted == "Holländisch":
+                    urlaubsart_input = "Bezienswaardigheden van"
+                gpt_version_wanted_title = "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8XScqmtY"#"ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8X9LXV3I"
+                gpt_version_wanted_descr = "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8XSmAIvz"
+                gpt_version_wanted_h1 = "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8XSvzggV"
+
+            elif urlaubsart_input == "Beaches":
+                if lang_wanted == "Deutsch":
+                    urlaubsart_input = "schönsten Strände"
+                elif lang_wanted == "Spanisch":
+                    urlaubsart_input = "---"
+                elif lang_wanted == "Holländisch":
+                    urlaubsart_input = "---"
+                gpt_version_wanted_title = "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8XSc8VKk"#"ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8X9LXV3I"
+                gpt_version_wanted_descr = "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8XTwQ6Sk"
+                gpt_version_wanted_h1 = "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8X8uR2wt"
+
+            elif urlaubsart_input == "Secret Spots":
+                if lang_wanted == "Deutsch":
+                    urlaubsart_input = "Geheimtipps"
+                elif lang_wanted == "Spanisch":
+                    urlaubsart_input = "---"
+                elif lang_wanted == "Holländisch":
+                    urlaubsart_input = "---"
+                gpt_version_wanted_title = "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8XScF5RN" #"ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8X9LXV3I"
+                gpt_version_wanted_descr = "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8XUqgOWv"
+                gpt_version_wanted_h1 = "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8XSugRNd"
+
+            elif urlaubsart_input == "Restaurants":
+                urlaubsart_input = "Restaurants"
+                gpt_version_wanted_title = "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8X9LXV3I"
+                gpt_version_wanted_descr = "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8XRYtx2E"
+                gpt_version_wanted_h1 = "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8X8uR2wt"
+
+            elif urlaubsart_input == "Activities":
+                urlaubsart_input = "Aktivitäten & Ausflüge"
+                gpt_version_wanted_title = "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8X9LXV3I"
+                gpt_version_wanted_descr = "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8XRYtx2E"
+                gpt_version_wanted_h1 = "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8X8uR2wt"
+
         else:
             gpt_version_wanted_title = gpt_version_wanted
             gpt_version_wanted_descr = gpt_version_wanted
@@ -146,7 +187,7 @@ def tnd(gpt_version_wanted, gpt_temp_wanted, lang_wanted):
         title_tag_generated_length = len(title_tag_generated)
         if 40 < title_tag_generated_length < 50:
             title_tag_length_ok = "⚠️"
-        elif 60 < title_tag_generated_length < 70:
+        elif 62 < title_tag_generated_length < 70:
             title_tag_length_ok = "⚠️"
         elif 51 < title_tag_generated_length < 61:
             title_tag_length_ok = "✅"
@@ -157,11 +198,11 @@ def tnd(gpt_version_wanted, gpt_temp_wanted, lang_wanted):
         descr_tag_generated, descr_tag_generated_cost, descr_tag_generated_gptversion = gptapi.openAI_content(act_as_prompt_descr, content_prompt_descr, gpt_temp_wanted_descr, gpt_version_wanted_descr)
 
         descr_tag_generated_length = len(descr_tag_generated)
-        if 130 < descr_tag_generated_length < 150:
+        if 130 <= descr_tag_generated_length <= 150:
             descr_tag_length_ok = "⚠️"
-        elif 160 < descr_tag_generated_length < 165:
+        elif 160 <= descr_tag_generated_length <= 165:
             descr_tag_length_ok = "⚠️"
-        elif 151 < descr_tag_generated_length < 161:
+        elif 151 <= descr_tag_generated_length <= 161:
             descr_tag_length_ok = "✅"
         else:
             descr_tag_length_ok = "❌"
