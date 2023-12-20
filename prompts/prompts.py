@@ -55,7 +55,7 @@ def sight_prompts(number_of_sights_wanted, destination_wanted, sights_not_needed
 
 # Mit nachfolgendem Prompt wird der beschreibende Text sowie der Bild-Tipp für jede neue Sehenswürdigkeit generiert
 def new_sight_prompt(content_length_wanted, new_sight, destination_wanted, lang_wanted):
-    content_prompt_new_sight = f"Antworte auf {lang_wanted}. Schreibe maximal {content_length_wanted} Wörter. Beschreibe die Sehenswürdigkeit {new_sight} in {destination_wanted} in der Urlaubsguru Brand Tonalität."
+    content_prompt_new_sight = f"Antworte auf {lang_wanted}. Schreibe maximal {content_length_wanted} Wörter. Beschreibe die Sehenswürdigkeit {new_sight} in {destination_wanted} in der Urlaubsguru Brand Tonalität. Verwende direkte Ansprache der Leser bei Bedarf, indem du sie im Plural mit 'Ihr' anredest."
     content_pic_prompt = f"Antworte auf {lang_wanted}. Schreibe maximal 50 Wörter: Was muss auf einem Bild für {new_sight} zu sehen sein, damit die Sehenswürdigkeit gut zur Geltung kommt und die Zielgruppe diese gerne besuchen möchte?"
     return content_prompt_new_sight, content_pic_prompt
 
@@ -107,7 +107,7 @@ def beach_prompts(number_of_beaches_wanted, destination_wanted, beaches_not_need
     return act_as_prompt_sights, structure_prompt_sights
 
 def new_beach_prompt(content_length_wanted_beaches, beach, destination_wanted_for_beach, lang_wanted):
-    content_prompt_new_sight = f"Antworte auf {lang_wanted}. Erzähle etwas über den Strand {beach}. Schreibe {content_length_wanted_beaches} Worte. Was macht ihn so besonders? Warum muss man als Tourist dort hin? Schreibe in der Urlaubsguru Brand Tonalität."
+    content_prompt_new_sight = f"Antworte auf {lang_wanted}. Erzähle etwas über den Strand {beach}. Schreibe {content_length_wanted_beaches} Worte. Was macht ihn so besonders? Warum muss man als Tourist dort hin? Schreibe in der Urlaubsguru Brand Tonalität. Verwende direkte Ansprache der Leser bei Bedarf, indem du sie im Plural mit 'Ihr' anredest."
     return content_prompt_new_sight
 
 
