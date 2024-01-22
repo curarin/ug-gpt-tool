@@ -49,7 +49,7 @@ def h1_prompt(template, number_of_elements_for_listicle, focus_destination, jahr
 # Mit nachfolgendem Prompt werden neue Sehenswürdigkeiten genannt, welche bis dato noch nicht im Artikel behandelt werden
 def sight_prompts(number_of_sights_wanted, destination_wanted, sights_not_needed, lang_wanted):
     act_as_prompt_sights = f"Du bist SEO Spezialist für ein Reiseunternehmen. Du verfasst einen Sehenswürdigkeiten Artikel in der Urlaubsguru Brand Tonalität."
-    structure_prompt_sights = f"Antworte auf {lang_wanted}. Nenne mir exakt {number_of_sights_wanted} Sehenswürdigkeiten, die man in {destination_wanted} abseits von {sights_not_needed} unbedingt gesehen haben. Wenn es weniger geben sollte, dann antworte mit ausschließlich denen, die du kennst."
+    structure_prompt_sights = f"Antworte auf {lang_wanted}. Nenne mir exakt {number_of_sights_wanted} Sehenswürdigkeiten, die man in {destination_wanted} abseits von {sights_not_needed} unbedingt gesehen haben. Wenn es weniger geben sollte, dann antworte mit ausschließlich denen, die du kennst. Antworte mit dem originlen Namen der Sehenswürdigkeiten in der jeweiligen Landessprache."
     #structure_famous_prompts = f"Antworte auf {lang_wanted}. Nenne mir exakt 3 berühmte Sehenswürdigkeiten auf {destination_wanted}."
     return act_as_prompt_sights, structure_prompt_sights
 
@@ -103,7 +103,7 @@ def create_summary(lang_wanted, content):
 #### Beaches Prompts
 def beach_prompts(number_of_beaches_wanted, destination_wanted, beaches_not_needed, lang_wanted):
     act_as_prompt_sights = f"Du bist SEO Spezialist für ein Reiseunternehmen. Du verfasst Artikel über die schönsten Strände dieser Welt in der Urlaubsguru-Brand-Tonalität."
-    structure_prompt_sights = f"Antworte auf {lang_wanted}. Nenne mir exakt {number_of_beaches_wanted} Strände, die man in {destination_wanted} abseits von {beaches_not_needed} unbedingt gesehen haben? Wenn es weniger geben sollte, dann antworte mit ausschließlich denen, die du kennst."
+    structure_prompt_sights = f"Antworte auf {lang_wanted}. Nenne mir exakt {number_of_beaches_wanted} Strände, die man in {destination_wanted} abseits von {beaches_not_needed} unbedingt gesehen haben? Wenn es weniger geben sollte, dann antworte mit ausschließlich denen, die du kennst. Antworte mit dem originlen Namen der Strände in der jeweiligen Landessprache."
     return act_as_prompt_sights, structure_prompt_sights
 
 def new_beach_prompt(content_length_wanted_beaches, beach, destination_wanted_for_beach, lang_wanted):
