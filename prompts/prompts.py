@@ -114,7 +114,7 @@ def new_beach_prompt(content_length_wanted_beaches, beach, destination_wanted_fo
 #### prompts für alt text
 
 def alt_tag_prompts(lang_wanted, image_url, image_context):
-    content_prompt_alt_text = f"Verfasse einen Alt Text für das Bild {image_url} in einem (1) Satz auf {lang_wanted}. {image_context} sollte vorkommen. Stelle dir vor, du möchtest einer sehbeeinträchgiten Person erklären, was auf dem Bild zu sehen ist im Kontext von {image_context}. Welche Elemente siehst du? Wo sind sie platziert? Welche Emotionen werden dabei geweckt? Schreibe nicht 'das Bild zeigt...' sondern beschreibe es direkt."
+    content_prompt_alt_text = f"Verfasse einen Alt Text für das Bild {image_url} mit maximal 150 Zeichen auf {lang_wanted}. {image_context} sollte vorkommen. Stelle dir vor, du möchtest einer sehbeeinträchgiten Person erklären, was auf dem Bild zu sehen ist. Welche Elemente siehst du? Wo sind sie platziert? Schreibe nicht 'das Bild zeigt...' sondern beschreibe es direkt."
     return content_prompt_alt_text
 
 def caption_prompts(lang_wanted, image_url):
