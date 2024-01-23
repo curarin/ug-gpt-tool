@@ -37,9 +37,6 @@ travel_deals_list = [
 
 
 def generate_product_description(gpt_version_wanted, gpt_temp_wanted, lang_wanted):
-    ### test gpt version trained for sights
-    gpt_version_wanted = "ft:gpt-3.5-turbo-1106:urlaubsguru-gmbh::8W1lM7Mt"
-    ##########################################
     st.title("Deal* intro text generation")
     st.subheader("Generate content for any given deal page.")
     st.markdown("<h4>Instructions:</h4>", unsafe_allow_html=True)
