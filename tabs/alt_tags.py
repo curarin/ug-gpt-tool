@@ -43,24 +43,36 @@ def generate_alt_text(gpt_version_wanted, gpt_temp_wanted, lang_wanted):
             soup = BeautifulSoup(r.text, 'html.parser')
             figure_tags = soup.find_all('figure')
             href_urls = []
-            ### find figure tag urls
-            for figure_tag in figure_tags:
+            for figure_tag in soup.find_all('figure'):
+                # Find the first 'a' tag within each 'figure' tag
                 a_tag = figure_tag.find('a')
+                
+                # Check if 'a' tag is found and has an 'href' attribute
                 if a_tag and 'href' in a_tag.attrs:
+                    # Extract the URL from 'href' attribute
                     href_url = a_tag['href']
-                    href_urls.append(href_url)
+                    if href_url.endswith('.jpeg') or href_url.endswith('.webp') or href_url.endswith('png'):
+                        href_urls.append(href_url)
                 else:
-                    st.warning("No images found.")
+                    # Display a warning if no 'a' tag with 'href' is found in the figure tag
+                    st.warning("No images found in the figure tag.")
+
             # Find the image tag
             img_tag = soup.find_all('img')
-            for img in img_tag:
-                img_src = img['src']
-                if "urlaubsguru" in img_src and not img_src.endswith('.png'):
-                    href_urls.append(img_src)
+            for img in soup.find_all('img'):
+                # Get 'src' if available, otherwise try 'data-src-owl'
+                img_src = img.get('src') or img.get('data-src-owl')
+
+                # Check if 'img_src' exists and contains the substring 'urlaubsguru'
+                if img_src and "mediafiles.urlaubsguru" in img_src:
+                    # Ensure it's not a '.png' file
+                    if img_src.endswith('.jpeg') or img_src.endswith('.gif') or img_src.endswith('.webp') or img_src.endswith('jpg'):
+                        href_urls.append(img_src)
 
             # Print the extracted href URLs
             alt_text_generated_cost_list = []
             for image_url in href_urls:
+                print(f"Sending this url to GPT: {image_url}")
                 #prompt generation
                 content_prompt_alt = gptprompts.alt_tag_prompts(lang_wanted, image_url, image_context)
                 content_prompt_caption = gptprompts.caption_prompts(lang_wanted, image_url)
