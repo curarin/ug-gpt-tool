@@ -77,7 +77,7 @@ def openAI_content(system_act_as, user_prompt, temp_wanted, gpt_version):
     elif gpt_version.startswith("ft:"):
         cost_per_token_input = 0.0030/1000
         cost_per_token_output = 0.0060/1000
-    elif gpt_version == "gpt-4o-2024-05-13":
+    elif gpt_version == "gpt-4o":
         cost_per_token_input = 5/1000000
         cost_per_token_output = 15/1000000
         
@@ -113,11 +113,11 @@ def openAI_vision(user_prompt, image_url):
     prompt_tokens = response.usage.prompt_tokens
     completion_tokens = response.usage.completion_tokens
         
-    cost_per_token_input = 0.01
-    cost_per_token_output = 0.03
+    cost_per_token_input = 5/1000000
+    cost_per_token_output = 15/1000000
         
-    cost_prompt = prompt_tokens * (cost_per_token_input/1000)
-    cost_completion = completion_tokens * (cost_per_token_output/1000)
+    cost_prompt = prompt_tokens * (cost_per_token_input)
+    cost_completion = completion_tokens * (cost_per_token_output)
     total_cost = cost_prompt + cost_completion
     total_cost = round(total_cost, 5)
 
