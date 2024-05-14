@@ -42,7 +42,7 @@ def get_summary(gpt_version_wanted, gpt_temp_wanted, lang_wanted):
     if form_submit_summary_input_values:
         scraping_result = scraping.extract_text_from_url(url_for_scraping, "summary", lang_wanted)
         
-        summary_webpage, summary_webpage_cost, summary_webpage_gpt_version = gptapi.openAI_content("", f"Antworte mir {lang_wanted }. Erstelle mir eine Zusammenfassung. Nutze diese Art der Zusammenfassung: {kind_of_summary_todo}. Inhalt: {scraping_result}", 0.1, "gpt-4-1106-preview")
+        summary_webpage, summary_webpage_cost, summary_webpage_gpt_version = gptapi.openAI_content("", f"Antworte mir {lang_wanted }. Erstelle mir eine Zusammenfassung. Nutze diese Art der Zusammenfassung: {kind_of_summary_todo}. Inhalt: {scraping_result}", 0.1, gpt_version_wanted)
         st.subheader(f"Summary: {url_for_scraping}")
         st.write(summary_webpage)
         bq.to_bigquery("Summary Generator: Webpage", summary_webpage_cost, kind_of_summary, url_for_scraping, lang_wanted)

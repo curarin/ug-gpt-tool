@@ -17,7 +17,7 @@ def sidebar():
         lang_wanted = "Holländisch"
     st.divider()
     
-    gpt_version_wanted = "GPT-4" #st.selectbox("GPT Version", ["GPT-4", "GPT-3.5"])
+    gpt_version_wanted = "gpt-4o" #st.selectbox("GPT Version", ["GPT-4", "GPT-3.5"])
     if gpt_version_wanted == "GPT-4":
         gpt_version_wanted = "gpt-4-1106-preview"
     elif gpt_version_wanted == "GPT-3.5":
