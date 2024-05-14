@@ -59,12 +59,13 @@ def generate_alt_text(gpt_version_wanted, gpt_temp_wanted, lang_wanted):
 
             # Find the image tag
             img_tag = soup.find_all('img')
+            print(img_tag)
             for img in soup.find_all('img'):
                 # Get 'src' if available, otherwise try 'data-src-owl'
                 img_src = img.get('src') or img.get('data-src-owl')
 
                 # Check if 'img_src' exists and contains the substring 'urlaubsguru'
-                if img_src and "mediafiles.urlaubsguru" in img_src:
+                if img_src and "urlaubsguru" in img_src:
                     # Ensure it's not a '.png' file
                     if img_src.endswith('.jpeg') or img_src.endswith('.gif') or img_src.endswith('.webp') or img_src.endswith('jpg'):
                         href_urls.append(img_src)
