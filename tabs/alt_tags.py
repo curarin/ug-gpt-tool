@@ -41,17 +41,19 @@ def generate_alt_text(gpt_version_wanted, gpt_temp_wanted, lang_wanted):
             r = requests.get(url)
             soup = BeautifulSoup(r.text, "lxml")
             soup = BeautifulSoup(r.text, 'html.parser')
+
             figure_tags = soup.find_all('figure')
             href_urls = []
-            for figure_tag in soup.find_all('figure'):
+            for figure_tag in figure_tags:
                 # Find the first 'a' tag within each 'figure' tag
                 a_tag = figure_tag.find('a')
+                print(a_tag)
                 
                 # Check if 'a' tag is found and has an 'href' attribute
                 if a_tag and 'href' in a_tag.attrs:
                     # Extract the URL from 'href' attribute
                     href_url = a_tag['href']
-                    if href_url.endswith('.jpeg') or href_url.endswith('.webp') or href_url.endswith('png'):
+                    if href_url.endswith('.jpeg') or href_url.endswith('.webp') or href_url.endswith('png') or href_url.endswith("jpg"):
                         href_urls.append(href_url)
                 else:
                     # Display a warning if no 'a' tag with 'href' is found in the figure tag
@@ -59,7 +61,6 @@ def generate_alt_text(gpt_version_wanted, gpt_temp_wanted, lang_wanted):
 
             # Find the image tag
             img_tag = soup.find_all('img')
-            print(img_tag)
             for img in soup.find_all('img'):
                 # Get 'src' if available, otherwise try 'data-src-owl'
                 img_src = img.get('src') or img.get('data-src-owl')
@@ -69,6 +70,7 @@ def generate_alt_text(gpt_version_wanted, gpt_temp_wanted, lang_wanted):
                     # Ensure it's not a '.png' file
                     if img_src.endswith('.jpeg') or img_src.endswith('.gif') or img_src.endswith('.webp') or img_src.endswith('jpg'):
                         href_urls.append(img_src)
+
 
             # Print the extracted href URLs
             alt_text_generated_cost_list = []

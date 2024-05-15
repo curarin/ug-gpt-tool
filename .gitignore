@@ -2,3 +2,4 @@
 .streamlit/bq.json
 credentials.yaml
 *.pyc
+*.pyc
